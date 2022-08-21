@@ -2,3 +2,6 @@
 /composer.lock
 /composer.phar
 /.phpunit.result.cache
+build
+coverage
+phpunit.xml
