@@ -25,6 +25,39 @@ final class MethodTest extends TestCase
     $this->assertTrue($account_info->isSuccess());
   }
 
+  public function testAccountTxNextRequest()
+  {
+    $client = new \XRPLWin\XRPL\Client([]);
+    $account_tx = $client->api('account_tx')
+            ->params([
+              'account' => 'rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w',
+              'binary' => false,
+              'forward' => true,
+              'ledger_index_max' => -1,
+              'ledger_index_min' => -1,
+              'limit' => 2
+          ]);
+    $account_tx->send();
+
+    $this->assertTrue($account_tx->isSuccess());
+    $this->assertTrue($account_tx->hasNextPage());
+
+    $finalResult = $account_tx->finalResult();
+    $this->assertEquals(2,count($finalResult));
+    $txnSignature = $finalResult[0]->tx->TxnSignature;
+
+    $next_account_tx = $account_tx->next();
+    $this->assertInstanceOf(\XRPLWin\XRPL\Api\Methods\AccountTx::class,$next_account_tx);
+    $next_account_tx->send();
+    $this->assertTrue($next_account_tx->isSuccess());
+    $this->assertTrue($next_account_tx->hasNextPage());
+    $nextFinalResult = $next_account_tx->finalResult();
+    $nextTxnSignature = $nextFinalResult[0]->tx->TxnSignature;
+
+    # Check if first result of first page is not same as first result in second page
+    $this->assertNotEquals($nextTxnSignature,$txnSignature);
+  }
+
   public function testAccountInfoInvalidParamReturnsXrplErrorResponse(): void
   {
     $client = new \XRPLWin\XRPL\Client([]);
