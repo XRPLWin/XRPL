@@ -1,3 +1,7 @@
+![main workflow](https://github.com/XRPLWin/XRPL/actions/workflows/main.yml/badge.svg)
+[![Total Downloads](https://img.shields.io/packagist/dt/xrplwin/xrpl.svg?style=flat-square)](https://packagist.org/packages/xrplwin/xrpl)
+
+
 # PHP XRPL REST API
 
 ## Requirements
