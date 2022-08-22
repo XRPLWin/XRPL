@@ -2,12 +2,12 @@
 
 namespace XRPLWin\XRPL;
 
+use XRPLWin\XRPL\Client\XRPLWinHttpClientInterface;
+use XRPLWin\XRPL\Client\Guzzle\HttpClient;
 
 class Client
 {
-  const VERSION = '0.0.1';
-  
-  private readonly \GuzzleHttp\Client $httpClient;
+  private readonly XRPLWinHttpClientInterface $httpClient;
   private readonly string $endpointReportingUri;
   private readonly string $endpointFullhistoryUri;
 
@@ -20,10 +20,14 @@ class Client
   /**
   * XRPL Client constructor.
   * @param array $config
+  * @param 
   */
-  public function __construct(array $config)
+  public function __construct(array $config, ?XRPLWinHttpClientInterface $httpClient = null)
   {
-    $this->httpClient = new \GuzzleHttp\Client();
+    if($httpClient === null)
+      $this->httpClient = new HttpClient();
+    else
+      $this->httpClient = $httpClient;
 
     $config = array_merge($this->config_default,$config);
 
@@ -48,7 +52,7 @@ class Client
   }
 
 
-  public function getHttpClient(): \GuzzleHttp\Client
+  public function getHttpClient(): XRPLWinHttpClientInterface
   {
     return $this->httpClient;
   }

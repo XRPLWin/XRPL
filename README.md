@@ -8,7 +8,7 @@
 This Package is still in **beta**, to install run
 
 ```
-composer require TODO
+composer require xrplwin/xrpl
 ```
 
 ## Usage sample
@@ -97,5 +97,9 @@ $account_tx = $client->api('account_tx')->params([
 ## Running tests
 Run all tests in "tests" directory.
 ```
-vendor/bin/phpunit tests
+composer test
+```
+or
+```
+./vendor/bin/phpunit --testdox
 ```

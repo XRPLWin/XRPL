@@ -10,6 +10,7 @@ use XRPLWin\XRPL\Exceptions\NotSentException;
 use XRPLWin\XRPL\Exceptions\XRPL\NotSuccessException;
 use XRPLWin\XRPL\Exceptions\XRPL\RateLimitedException;
 use Throwable;
+use Closure;
 
 abstract class AbstractMethod
 {
@@ -23,6 +24,7 @@ abstract class AbstractMethod
   protected bool $executedWithError = false;
   protected ?int $executedWithErrorCode;
   protected int $cooldown_seconds = 5; //how much seconds to sleep after rate limited request
+  protected ?Closure $cooldown_callback = null;
   protected int $tries = 3; //how much times request is retried if rate limiting is reached
   protected int $tries_tracker = 0; //how much tries are executed so far
 
@@ -72,6 +74,11 @@ abstract class AbstractMethod
     return $this;
   }
 
+  public function getParams(): array
+  {
+    return $this->params;
+  }
+
   /**
   * Executes request against Ledger node / enpoint uri.
   * Ignores marker.
@@ -81,7 +88,11 @@ abstract class AbstractMethod
   */
   protected function sendOnce(bool $silent = false)
   {
-    
+    //Reset
+    $this->executedWithError = false;
+    $this->executedWithErrorCode = null;
+    $this->lastException = null;
+
     $p = [];
     $p['method'] = $this->method;
     if(!empty($this->params)) {
@@ -101,9 +112,6 @@ abstract class AbstractMethod
       ]);
       $status_code = $response->getStatusCode();
     } catch (\Throwable $e) {
-
-      //TODO handle rate limiting
-
       if(!$silent)
         throw new BadRequestException('HTTP request failed with message: '.$e->getMessage(), 0, $e);
       else
@@ -142,14 +150,20 @@ abstract class AbstractMethod
   */
   public function send()
   {
-    $this->sendOnce(false);
+    $this->sendOnce(true);
     if($this->executedWithError)
     {
       if($this->executedWithErrorCode == 503) { //rate limited
-        sleep($this->cooldown_seconds);
-        if($this->tries_tracker >= $this->tries)
+        //if($this->cooldown_seconds > 0) {
+          $this->cooldown($this->tries_tracker);
+          //sleep($this->cooldown_seconds);
+        //}
+        
+        if($this->tries_tracker >= $this->tries) {
           throw new RateLimitedException('XRPL Rate limited after '.$this->tries_tracker.' tries');
-
+        }
+         
+        
         $this->send(); //retry again
       }
       else
@@ -251,9 +265,60 @@ abstract class AbstractMethod
     return null;
   }
 
+  /**
+   * Sets how much seconds script will sleep() before trying new request.
+   * Default value is 5 seconds. Set 0 to disable sleep().
+   * @return self
+   */
   public function setCooldownSeconds(int $seconds): self
   {
     $this->cooldown_seconds = $seconds;
+    return $this;
+  }
+
+  /**
+   * Set closure handler for executing after rate-limited request.
+   * Note that this function is designed to execute sleep()
+   * Depending of $current_try you have better control over how to rate-limit
+   * in-between HTTP requests.
+   * For example first two tries sleep for 3 seconds, third sleep 10 seconds and so on.
+   * @param Closure $handler(int $current_try, int $default_cooldown_seconds)
+   * @return self
+   */
+  public function setCooldownHandler(Closure $handler): self
+  {
+    $this->cooldown_callback = $handler;
+    return $this;
+  }
+
+  /**
+   * Executes cooldown handler after rate-limited request
+   * or defaults to simple sleep($this->cooldown_seconds) method
+   * @return void
+   */
+  protected function cooldown(int $current_try = 1): void
+  {
+    $callback = $this->cooldown_callback; //init Closure to $callback
+    
+    if(is_callable($callback))
+      $callback($current_try,$this->cooldown_seconds); //call it
+    else {
+      if($this->cooldown_seconds > 0)
+        sleep($this->cooldown_seconds);
+    }
+  }
+
+  /**
+   * Sets how much times script will try to re-query Ledger in case of Rate limited response.
+   * Default value is 5 seconds.
+   * @return self
+   */
+  public function setTries(int $tries): self
+  {
+    if($tries < 1)
+      throw new \Exception('Tries can not be lower than 1');
+
+    $this->tries = $tries;
     return $this;
   }
 }
