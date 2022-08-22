@@ -2,8 +2,6 @@
 [![GitHub license](https://img.shields.io/github/license/XRPLWin/XRPL)](https://github.com/XRPLWin/XRPL/blob/main/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/xrplwin/xrpl.svg?style=flat)](https://packagist.org/packages/xrplwin/xrpl)
 
-
-
 # PHP XRPL REST API
 
 ## Requirements
