@@ -49,12 +49,7 @@ $account_tx->setCooldownHandler(
         sleep($default_cooldown_seconds * $current_try);
     }
 );
-
-
-//Optionally define number of tries and sleep
 ```
-
-
 
 ### Fetching response
 ```PHP
@@ -101,7 +96,7 @@ See [samples](samples/paginating.php) for more information.
 
 1. Prepare instance by setting params
 2. Use send() to execute request and handle errors by using try catch. (Request will be re-tried x amount of times if rate-limit is detected)
-4. XRPLedger response is stored in memory and it is available to read.
+4. XRPLedger response is stored in memory and it is available to read via `->finalResult()`, `->result()` and `->resultArray()`.
 
 ## Methods
 
