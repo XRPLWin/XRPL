@@ -32,8 +32,30 @@ $account_tx = $client->api('account_tx')->params([
     'limit' => 10
 ]);
 ```
-
 This will return an instance of `XRPLWin\XRPL\Api\Methods\AccountTx`.
+
+### Rate limit handling
+This is optional.  
+If you wish to define custom behaviour when request is rate-limited you can via `Closure` function. Define this before executing `send()`.
+```PHP
+//(optional) Override default cooldown seconds (default is 5 seconds)
+$account_tx->setCooldownSeconds(10);
+//(optional) Override default number of tries when request is rate-limited (default is 3)
+$account_tx->setTries(5);
+
+//(optional) Define custom cooldown callback
+$account_tx->setCooldownHandler(
+    function(int $current_try, int $default_cooldown_seconds) {
+        //Sample usage: calculate how much sleep() is needed depending on $current_try
+        sleep($default_cooldown_seconds * $current_try);
+    }
+);
+
+
+//Optionally define number of tries and sleep
+```
+
+
 
 ### Fetching response
 ```PHP

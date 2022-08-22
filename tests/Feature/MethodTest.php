@@ -15,7 +15,7 @@ final class MethodTest extends TestCase
     $client = new \XRPLWin\XRPL\Client([]);
     $account_info = $client->api('account_info')
             ->params([
-              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
               'strict' => true,
               'ledger_index' => 'current',
               'queue' => true
@@ -30,7 +30,7 @@ final class MethodTest extends TestCase
     $client = new \XRPLWin\XRPL\Client([]);
     $account_tx = $client->api('account_tx')
             ->params([
-              'account' => 'rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w',
+              'account' => 'rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w', //account taken from official xrpl.org documentation example
               'binary' => false,
               'forward' => true,
               'ledger_index_max' => -1,
@@ -63,7 +63,7 @@ final class MethodTest extends TestCase
     $client = new \XRPLWin\XRPL\Client([]);
     $account_info = $client->api('account_info')
             ->params([
-              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
               'strict' => true,
               'ledger_index' => 'invalidledgerindexdefinition',
               'queue' => true
@@ -77,7 +77,7 @@ final class MethodTest extends TestCase
     $client = new \XRPLWin\XRPL\Client([]);
     $account_info = $client->api('account_info')
             ->params([
-              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
               'strict' => true,
               'ledger_index' => 'invalidledgerindexdefinition',
               'queue' => true
@@ -104,7 +104,7 @@ final class MethodTest extends TestCase
     $client = new \XRPLWin\XRPL\Client([],$httpClient);
     $account_info = $client->api('account_info')
         ->params([
-          'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+          'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
           'strict' => true,
           'ledger_index' => 'current',
           'queue' => true
@@ -139,7 +139,7 @@ final class MethodTest extends TestCase
 
     $account_info = $client->api('account_info')
         ->params([
-          'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+          'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
           'strict' => true,
           'ledger_index' => 'current',
           'queue' => true
@@ -163,7 +163,7 @@ final class MethodTest extends TestCase
     $client = new \XRPLWin\XRPL\Client([]);
     $account_info = $client->api('account_info')
             ->params([
-              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn',
+              'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
               'strict' => true,
               'ledger_index' => 'current',
               'queue' => true
