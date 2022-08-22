@@ -2,16 +2,9 @@
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-    backupGlobals="false"
-    backupStaticAttributes="false"
     bootstrap="vendor/autoload.php"
     colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    processIsolation="false"
-    stopOnFailure="false"
-    executionOrder="random"
+    stopOnFailure="true"
     failOnWarning="true"
     failOnRisky="true"
     failOnEmptyTestSuite="true"
@@ -19,8 +12,8 @@
     verbose="true"
 >
     <testsuites>
-        <testsuite name="XRPLWin XRPL API Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
 </phpunit>
