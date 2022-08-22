@@ -9,6 +9,8 @@ final class ClientStaticTest extends TestCase
 {
     public function testSnakeToCaseFunction(): void
     {
+      $this->assertTrue(false);
+      
       $check1 = \XRPLWin\XRPL\Client::snakeToCase('func_name_one');
       $this->assertEquals($check1,'FuncNameOne');
 
