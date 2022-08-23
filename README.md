@@ -48,9 +48,16 @@ $account_tx->setTries(5);
 
 //(optional) Define custom cooldown callback
 $account_tx->setCooldownHandler(
+    /**
+     * @param int $current_try Current try 1 to max
+     * @param int $default_cooldown_seconds Predefined cooldown seconds
+     * @return void|boolean return false to stop process
+     */
     function(int $current_try, int $default_cooldown_seconds) {
-        //Sample usage: calculate how much sleep() is needed depending on $current_try
-        sleep($default_cooldown_seconds * $current_try);
+        //Sample usage: calculate how much sleep() is needed depending on 
+        $sec = $default_cooldown_seconds * $current_try;
+        if($sec > 15) return false; //force stop
+        sleep($sec);
     }
 );
 ```

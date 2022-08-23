@@ -300,8 +300,12 @@ abstract class AbstractMethod
   {
     $callback = $this->cooldown_callback; //init Closure to $callback
     
-    if(is_callable($callback))
-      $callback($current_try,$this->cooldown_seconds); //call it
+    if(is_callable($callback)) {
+      $callback_response = $callback($current_try,$this->cooldown_seconds); //call it
+      if($callback_response === false)
+        $this->tries_tracker = $this->tries; //this will stop loop
+    }
+      
     else {
       if($this->cooldown_seconds > 0)
         sleep($this->cooldown_seconds);
