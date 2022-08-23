@@ -135,16 +135,12 @@ abstract class AbstractMethod
       else
         $this->result = $res;
     }
-      
-      
-    
     $this->executed = true;
     return $this;
   }
 
   /**
   * Executes request against Ledger node / enpoint uri.
-  * @param bool $silent - set true to not throw exception of HTTP error
   * @return self
   * @throws BadRequestException
   */
