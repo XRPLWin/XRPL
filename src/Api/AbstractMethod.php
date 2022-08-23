@@ -104,7 +104,6 @@ abstract class AbstractMethod
     $this->tries_tracker++;
     try{
       $response = $this->client
-      
       ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
       ->request('POST', $this->endpoint, [
         'http_errors' => false,
