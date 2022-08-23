@@ -3,14 +3,15 @@
 namespace XRPLWin\XRPL\Api;
 
 use XRPLWin\XRPL\Client;
-
-use XRPLWin\XRPL\Exceptions\XWException;
+//use XRPLWin\XRPL\Exceptions\XWException;
 use XRPLWin\XRPL\Exceptions\BadRequestException;
 use XRPLWin\XRPL\Exceptions\NotSentException;
 use XRPLWin\XRPL\Exceptions\XRPL\NotSuccessException;
 use XRPLWin\XRPL\Exceptions\XRPL\RateLimitedException;
+use GuzzleHttp\Promise\Promise;
 use Throwable;
 use Closure;
+
 
 abstract class AbstractMethod
 {
@@ -77,6 +78,60 @@ abstract class AbstractMethod
   public function getParams(): array
   {
     return $this->params;
+  }
+
+  /**
+   * Prepares asynchronous request.
+   * The promise returned by these methods implements the Promises/A+ spec
+   * @return GuzzleHttp\Promise\Promise
+   */
+  public function requestAsync(): Promise
+  {
+    $p = [];
+    $p['method'] = $this->method;
+    if(!empty($this->params)) {
+      $p['params'] = [];
+      $p['params'][] = $this->params;
+    }
+
+    //Reset
+    $this->executedWithError = false;
+    $this->executedWithErrorCode = null;
+    $this->lastException = null;
+    $this->tries_tracker++;
+
+    $p = [];
+    $p['method'] = $this->method;
+    if(!empty($this->params)) {
+      $p['params'] = [];
+      $p['params'][] = $this->params;
+    }
+
+    /** @var GuzzleHttp\Promise\Promise */
+    $promise = $this->client
+      ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
+      ->requestAsync('POST', $this->endpoint, [
+        'http_errors' => false,
+        'body' => \json_encode($p),
+        'headers' => $this->client->getHeaders()
+      ]);
+    
+    return $promise;
+  }
+
+  /**
+   * Fills Http Response back to this instance.
+   * @param array|\GuzzleHttp\Psr7\Response $responseData
+   * @return self
+   */
+  public function fill(array|\GuzzleHttp\Psr7\Response $responseData): self
+  {
+    if(!is_array($responseData))
+      $responseData = \json_decode((string)$responseData->getBody(),false);
+    
+    $this->result = $responseData;
+    $this->executed = true;
+    return $this;
   }
 
   /**

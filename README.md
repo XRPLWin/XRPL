@@ -86,6 +86,30 @@ $transactions   = $account_tx->finalResult(); //array of transactions
 
 Class method `send()` executes request against XRPLedger and response is stored into instance object. After that you can use one of provided class methods to retrieve result.
 
+### Promises
+Alternative to fetch syncronous response as defined above, you can get `Promise`  
+[Read more](https://github.com/guzzle/promises) about Promises. Returned object is [Promises/A+](https://promisesaplus.com/) implementation. 
+```PHP
+$promise = $account_tx->requestAsync();
+
+$promises = [
+    'rAcct1' => $promise,
+    //...more promises
+];
+
+// Wait for the requests to complete
+// Throws a ConnectException if any of the requests fail
+$responses = Promise\Utils::unwrap($promises);
+
+//Fill response data back into $account_info instance
+$account_info->fill($responses['rAcct1']);
+
+//...
+$transactions = $account_tx->finalResult();
+
+```
+*Note*: You will need to handle rate limiting and exception handling yourself when using Promises.
+
 ### Paginating result
 ```PHP
 
