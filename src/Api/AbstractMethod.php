@@ -100,7 +100,7 @@ abstract class AbstractMethod
       $p['params'][] = $this->params;
     }
 
-    /** @var GuzzleHttp\Promise\PromiseInterface */
+    /** @var \GuzzleHttp\Promise\PromiseInterface */
     $promise = $this->client
       ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
       ->requestAsync('POST', $this->endpoint, [
