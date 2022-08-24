@@ -8,7 +8,7 @@ use XRPLWin\XRPL\Exceptions\BadRequestException;
 use XRPLWin\XRPL\Exceptions\NotSentException;
 use XRPLWin\XRPL\Exceptions\XRPL\NotSuccessException;
 use XRPLWin\XRPL\Exceptions\XRPL\RateLimitedException;
-use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\PromiseInterface;
 use Throwable;
 use Closure;
 
@@ -83,9 +83,9 @@ abstract class AbstractMethod
   /**
    * Prepares asynchronous request.
    * The promise returned by these methods implements the Promises/A+ spec
-   * @return GuzzleHttp\Promise\Promise
+   * @return GuzzleHttp\Promise\PromiseInterface
    */
-  public function requestAsync(): Promise
+  public function requestAsync(): PromiseInterface
   {
     //Reset
     $this->executedWithError = false;
@@ -100,7 +100,7 @@ abstract class AbstractMethod
       $p['params'][] = $this->params;
     }
 
-    /** @var GuzzleHttp\Promise\Promise */
+    /** @var GuzzleHttp\Promise\PromiseInterface */
     $promise = $this->client
       ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
       ->requestAsync('POST', $this->endpoint, [

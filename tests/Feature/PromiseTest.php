@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use PHPUnit\Framework\TestCase;
-use GuzzleHttp\Promise;
+use GuzzleHttp\Promise as P;
 
 final class PromiseTest extends TestCase
 {
@@ -18,7 +18,7 @@ final class PromiseTest extends TestCase
           'queue' => true
       ]);
       $promise = $account_info->requestAsync();
-      $this->assertInstanceOf(\GuzzleHttp\Promise\Promise::class,$promise);
+      $this->assertInstanceOf(\GuzzleHttp\Promise\PromiseInterface::class,$promise);
 
       $client2 = new \XRPLWin\XRPL\Client([]);
       $account_info2 = $client2->api('account_info')
@@ -37,7 +37,7 @@ final class PromiseTest extends TestCase
 
       // Wait for the requests to complete; throws a ConnectException
       // if any of the requests fail
-      $responses = Promise\Utils::unwrap($promises);
+      $responses = P\Utils::unwrap($promises);
 
       $account_info->fill($responses['rAcct1']);
       $account_info2->fill($responses['rAcct2']);
