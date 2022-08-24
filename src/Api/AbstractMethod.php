@@ -87,13 +87,6 @@ abstract class AbstractMethod
    */
   public function requestAsync(): Promise
   {
-    $p = [];
-    $p['method'] = $this->method;
-    if(!empty($this->params)) {
-      $p['params'] = [];
-      $p['params'][] = $this->params;
-    }
-
     //Reset
     $this->executedWithError = false;
     $this->executedWithErrorCode = null;
@@ -111,7 +104,7 @@ abstract class AbstractMethod
     $promise = $this->client
       ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
       ->requestAsync('POST', $this->endpoint, [
-        'http_errors' => false,
+        'http_errors' => true,
         'body' => \json_encode($p),
         'headers' => $this->client->getHeaders()
       ]);
