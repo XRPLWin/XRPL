@@ -99,7 +99,7 @@ $promises = [
 
 // Wait for the requests to complete
 // Throws a ConnectException if any of the requests fail
-$responses = Promise\Utils::unwrap($promises);
+$responses = \GuzzleHttp\Promise\Utils::unwrap($promises);
 
 //Fill response data back into $account_info instance
 $account_info->fill($responses['rAcct1']);
@@ -131,7 +131,10 @@ See [samples](samples/paginating.php) for more information.
 
 1. Prepare instance by setting params
 2. Use send() to execute request and handle errors by using try catch. (Request will be re-tried x amount of times if rate-limit is detected)
-4. XRPLedger response is stored in memory and it is available to read via `->finalResult()`, `->result()` and `->resultArray()`.
+4. XRPLedger response is stored in memory and it is available to read via  
+`->result()`  
+`->resultArray()`  
+`->finalResult()`
 
 ## Methods
 
