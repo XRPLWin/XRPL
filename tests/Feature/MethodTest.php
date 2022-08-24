@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Feature;
+namespace XRPLWin\XRPL\Tests\Feature;
 
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Handler\MockHandler;
