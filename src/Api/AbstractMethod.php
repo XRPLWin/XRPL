@@ -115,15 +115,26 @@ abstract class AbstractMethod
   /**
    * Fills Http Response back to this instance.
    * @param array|\GuzzleHttp\Psr7\Response $responseData
+   * @throws BadRequestException
    * @return self
    */
-  public function fill(array|\GuzzleHttp\Psr7\Response $responseData): self
+  public function fill(array|\GuzzleHttp\Psr7\Response $response): self
   {
-    if(!is_array($responseData))
-      $responseData = \json_decode((string)$responseData->getBody(),false);
-    
-    $this->result = $responseData;
-    $this->executed = true;
+    if($response instanceof \GuzzleHttp\Psr7\Response) {
+      $status_code = $response->getStatusCode();
+      if($status_code !== 200) {
+        $this->executedWithError = true;
+        $this->executedWithErrorCode = $status_code;
+        $this->lastException = new BadRequestException('HTTP request failed with message: '.$response->getReasonPhrase());
+        throw $this->lastException;
+      } else {
+        $this->result = \json_decode((string)$response->getBody(),false);
+      }
+      $this->executed = true;
+    } else {
+      $this->result = $response;
+      $this->executed = true;
+    }
     return $this;
   }
 
@@ -253,6 +264,21 @@ abstract class AbstractMethod
       return true;
     
     return false;
+  }
+
+  public function getIsExecutedWithError()
+  {
+    return $this->executedWithError;
+  }
+
+  public function getExecutedWithErrorCode()
+  {
+    return $this->executedWithErrorCode;
+  }
+
+  public function getLastException()
+  {
+    return $this->lastException;
   }
 
   /**
