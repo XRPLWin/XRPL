@@ -105,6 +105,7 @@ abstract class AbstractMethod
       ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
       ->requestAsync('POST', $this->endpoint, [
         'http_errors' => true,
+        'connect_timeout' => 10,
         'body' => \json_encode($p),
         'headers' => $this->client->getHeaders()
       ]);
@@ -166,6 +167,7 @@ abstract class AbstractMethod
       ->getHttpClient() /** @var \XRPLWin\XRPL\Client\XRPLWinHttpClientInterface */
       ->request('POST', $this->endpoint, [
         'http_errors' => false,
+        'connect_timeout' => 10,
         'body' => \json_encode($p),
         'headers' => $this->client->getHeaders()
       ]);
@@ -217,8 +219,6 @@ abstract class AbstractMethod
         if($this->tries_tracker >= $this->tries) {
           throw new RateLimitedException('XRPL Rate limited after '.$this->tries_tracker.' tries');
         }
-         
-        
         $this->send(); //retry again
       }
       else
