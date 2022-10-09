@@ -101,8 +101,8 @@ $promises = [
 // Throws a ConnectException if any of the requests fail
 $responses = \GuzzleHttp\Promise\Utils::unwrap($promises);
 
-//Fill response data back into $account_info instance
-$account_info->fill($responses['rAcct1']);
+//Fill response data back into $account_tx instance
+$account_tx->fill($responses['rAcct1']);
 
 //...
 $transactions = $account_tx->finalResult();
