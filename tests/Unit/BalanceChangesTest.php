@@ -45,7 +45,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-0.01',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ],
           [
             'value' => '-0.012',
@@ -59,12 +59,12 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '0.01',
             'currency' => 'USD',
-            'issuer' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
+            'counterparty' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
           ],
           [
             'value' => '-0.01',
             'currency' => 'USD',
-            'issuer' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
+            'counterparty' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
           ]
         ]
       ],
@@ -74,7 +74,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '0.01',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ]
         ]
       ]
@@ -97,7 +97,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '0.2',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ]
         ]
       ],
@@ -107,12 +107,12 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-0.2',
             'currency' => 'USD',
-            'issuer' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
+            'counterparty' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
           ],
           [
             'value' => '0.2',
             'currency' => 'USD',
-            'issuer' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
+            'counterparty' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
           ]
         ]
       ],
@@ -122,7 +122,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-0.2',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ],
           [
             'value' => '-0.012',
@@ -149,7 +149,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-0.01',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ],
           [
             'value' => '-0.012',
@@ -163,12 +163,12 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '0.01',
             'currency' => 'USD',
-            'issuer' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
+            'counterparty' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
           ],
           [
             'value' => '-0.01',
             'currency' => 'USD',
-            'issuer' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
+            'counterparty' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
           ]
         ]
       ],
@@ -178,7 +178,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '0.01',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ]
         ]
       ]
@@ -223,7 +223,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '10',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q',
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q',
           ],
           [
             'value' => '-0.012',
@@ -237,7 +237,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-10',
             'currency' => 'USD',
-            'issuer' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K',
+            'counterparty' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K',
           ]
         ]
       ]
@@ -304,7 +304,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '0.02',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ]
         ],
       ],
@@ -314,12 +314,12 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-0.02',
             'currency' => 'USD',
-            'issuer' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
+            'counterparty' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc'
           ],
           [
             'value' => '0.02',
             'currency' => 'USD',
-            'issuer' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
+            'counterparty' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K'
           ]
         ]
       ],
@@ -329,7 +329,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'value' => '-0.02',
             'currency' => 'USD',
-            'issuer' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
+            'counterparty' => 'rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q'
           ],
           [
             'value' => '-0.012',

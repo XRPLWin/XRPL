@@ -112,7 +112,7 @@ final class BalanceChanges
     $result = [
       'account' => (isset($fields->LowLimit->issuer)) ? $fields->LowLimit->issuer : '',
       'balance' => [
-        'issuer' => (isset($fields->HighLimit->issuer)) ? $fields->HighLimit->issuer : '',
+        'counterparty' => (isset($fields->HighLimit->issuer)) ? $fields->HighLimit->issuer : '',
         'currency' => (isset($fields->Balance->currency)) ? $fields->Balance->currency : '',
         'value' => (string)$value->stripTrailingZeros(),
       ]
@@ -155,9 +155,9 @@ final class BalanceChanges
   {
     $negatedBalance = BigDecimal::of($balanceChange['balance']['value'])->negated();
     $result = [
-      'account' => $balanceChange['balance']['issuer'],
+      'account' => $balanceChange['balance']['counterparty'],
       'balance' => [
-        'issuer' => $balanceChange['account'],
+        'counterparty' => $balanceChange['account'],
         'currency' => $balanceChange['balance']['currency'],
         'value' => (string)$negatedBalance->stripTrailingZeros(),
       ]
