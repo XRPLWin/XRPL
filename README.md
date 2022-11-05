@@ -147,6 +147,14 @@ $account_tx = $client->api('account_tx')->params([
 ]);
 ```
 
+### tx
+
+```PHP
+$account_tx = $client->api('tx')->params([
+    'transaction' => 'DE80B0064677CEFFDE...',
+    'binary' => false
+]);
+```
 
 ## Running tests
 Run all tests in "tests" directory.
