@@ -248,6 +248,10 @@ abstract class AbstractMethod
       $params['marker'] = $this->result->result->marker;
     $nextMethod = $this->client->api($this->method)->params($params);
 
+    if($this->cooldown_callback !== null) {
+      $nextMethod->setCooldownHandler($this->cooldown_callback);
+    }
+
     return $nextMethod;
   }
 
