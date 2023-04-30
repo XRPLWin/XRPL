@@ -156,6 +156,8 @@ $account_tx = $client->api('tx')->params([
 ]);
 ```
 
+For other methods refer to https://xrpl.org/websocket-api-tool.html and [src/Api/Methods](src/Api/Methods)
+
 ## Running tests
 Run all tests in "tests" directory.
 ```
