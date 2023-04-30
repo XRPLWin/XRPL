@@ -6,13 +6,13 @@ use XRPLWin\XRPL\Api\AbstractMethod;
 use XRPLWin\XRPL\Exceptions\NotSentException;
 use XRPLWin\XRPL\Exceptions\XRPL\NotSuccessException;
 
-class Tx extends AbstractMethod
+class AccountOffers extends AbstractMethod
 {
-  protected string $method = 'tx';
-  protected string $endpoint_config_key = 'endpoint_fullhistory_uri';
+  protected string $method = 'account_offers';
+  protected string $endpoint_config_key = 'endpoint_reporting_uri';
 
   /**
-   * Returns result.
+   * Returns offers.
    * @return stdClass
    * @throws NotExecutedException
    */
@@ -24,6 +24,6 @@ class Tx extends AbstractMethod
     if(!$this->isSuccess())
       throw new NotSuccessException('Request did not return success result: '.\json_encode($this->result));
 
-    return $this->result()->result;
+    return $this->result()->result->offers;
   }
 }

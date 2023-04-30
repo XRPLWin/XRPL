@@ -11,7 +11,7 @@ final class PromiseTest extends TestCase
     {
       $client = new \XRPLWin\XRPL\Client([]);
       $account_info = $client->api('account_info')
-          ->params([
+        ->params([
           'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
           'strict' => true,
           'ledger_index' => 'current',
@@ -22,7 +22,7 @@ final class PromiseTest extends TestCase
 
       $client2 = new \XRPLWin\XRPL\Client([]);
       $account_info2 = $client2->api('account_info')
-          ->params([
+        ->params([
           'account' => 'rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn', //account taken from official xrpl.org documentation example
           'strict' => true,
           'ledger_index' => 'current',

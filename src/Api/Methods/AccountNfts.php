@@ -12,7 +12,7 @@ class AccountNfts extends AbstractMethod
   protected string $endpoint_config_key = 'endpoint_reporting_uri';
 
   /**
-   * Returns current ledger index.
+   * Returns account_nfts.
    * @return stdClass
    * @throws NotExecutedException
    */

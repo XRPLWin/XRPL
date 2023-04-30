@@ -6,10 +6,10 @@ use XRPLWin\XRPL\Api\AbstractMethod;
 use XRPLWin\XRPL\Exceptions\NotSentException;
 use XRPLWin\XRPL\Exceptions\XRPL\NotSuccessException;
 
-class Tx extends AbstractMethod
+class AccountCurrencies extends AbstractMethod
 {
-  protected string $method = 'tx';
-  protected string $endpoint_config_key = 'endpoint_fullhistory_uri';
+  protected string $method = 'account_currencies';
+  protected string $endpoint_config_key = 'endpoint_reporting_uri';
 
   /**
    * Returns result.

@@ -12,7 +12,7 @@ class AccountTx extends AbstractMethod
   protected string $endpoint_config_key = 'endpoint_fullhistory_uri';
 
   /**
-   * Returns current ledger index.
+   * Returns transactions.
    * @return array
    * @throws NotExecutedException
    */

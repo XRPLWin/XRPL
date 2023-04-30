@@ -12,7 +12,7 @@ class BookOffers extends AbstractMethod
   protected string $endpoint_config_key = 'endpoint_reporting_uri';
 
   /**
-   * Returns current ledger index.
+   * Returns offers.
    * @return array
    * @throws NotExecutedException
    */

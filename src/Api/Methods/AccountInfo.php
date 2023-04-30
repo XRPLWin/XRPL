@@ -12,7 +12,7 @@ class AccountInfo extends AbstractMethod
   protected string $endpoint_config_key = 'endpoint_reporting_uri';
 
   /**
-   * Returns current ledger index.
+   * Returns account_data.
    * @return stdClass
    * @throws NotExecutedException
    */
@@ -24,7 +24,6 @@ class AccountInfo extends AbstractMethod
     if(!$this->isSuccess())
       throw new NotSuccessException('Request did not return success result: '.\json_encode($this->result));
 
-    //dd('todo');
     return $this->result()->result->account_data;
   }
 }
