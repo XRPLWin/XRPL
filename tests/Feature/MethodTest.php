@@ -177,13 +177,13 @@ final class MethodTest extends TestCase
     $this->assertArrayHasKey('result',$array_response);
     //Clio does not send type
     //$this->assertArrayHasKey('type',$array_response);
-    $this->assertObjectHasAttribute('account_data',$array_response['result']);
-    $this->assertObjectHasAttribute('status',$array_response['result']);
+    $this->assertObjectHasProperty('account_data',$array_response['result']);
+    $this->assertObjectHasProperty('status',$array_response['result']);
 
     $object_response = $account_info->result();
     $this->assertIsObject($object_response);
-    $this->assertObjectHasAttribute('result',$object_response);
-    $this->assertObjectHasAttribute('account_data',$object_response->result);
-    $this->assertObjectHasAttribute('status',$object_response->result);
+    $this->assertObjectHasProperty('result',$object_response);
+    $this->assertObjectHasProperty('account_data',$object_response->result);
+    $this->assertObjectHasProperty('status',$object_response->result);
   }
 }

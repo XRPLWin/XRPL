@@ -29,7 +29,7 @@
         "brick/math": "^0.10.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^10"
     },
     "scripts": {
         "test": "./vendor/bin/phpunit --testdox"
