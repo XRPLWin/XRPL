@@ -13,10 +13,10 @@ class LedgerData extends AbstractMethod
 
   /**
    * Returns result.
-   * @return int
+   * @return stdClass
    * @throws NotExecutedException
    */
-  public function finalResult(): int
+  public function finalResult(): \stdClass
   {
     if(!$this->executed)
       throw new NotSentException('Please send request first');

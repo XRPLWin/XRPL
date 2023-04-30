@@ -13,10 +13,10 @@ class AccountNfts extends AbstractMethod
 
   /**
    * Returns account_nfts.
-   * @return stdClass
+   * @return array
    * @throws NotExecutedException
    */
-  public function finalResult(): \stdClass
+  public function finalResult(): array
   {
     if(!$this->executed)
       throw new NotSentException('Please send request first');
@@ -24,6 +24,6 @@ class AccountNfts extends AbstractMethod
     if(!$this->isSuccess())
       throw new NotSuccessException('Request did not return success result: '.\json_encode($this->result));
 
-    return (object)$this->result()->result->account_nfts;
+    return $this->result()->result->account_nfts;
   }
 }

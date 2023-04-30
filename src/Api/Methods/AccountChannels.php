@@ -13,10 +13,10 @@ class AccountChannels extends AbstractMethod
 
   /**
    * Returns channels.
-   * @return stdClass
+   * @return array
    * @throws NotExecutedException
    */
-  public function finalResult(): \stdClass
+  public function finalResult(): array
   {
     if(!$this->executed)
       throw new NotSentException('Please send request first');

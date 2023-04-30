@@ -6,17 +6,17 @@ use XRPLWin\XRPL\Api\AbstractMethod;
 use XRPLWin\XRPL\Exceptions\NotSentException;
 use XRPLWin\XRPL\Exceptions\XRPL\NotSuccessException;
 
-class AccountLines extends AbstractMethod
+class NftSellOffers extends AbstractMethod
 {
-  protected string $method = 'account_lines';
-  protected string $endpoint_config_key = 'endpoint_fullhistory_uri';
+  protected string $method = 'nft_sell_offers';
+  protected string $endpoint_config_key = 'endpoint_reporting_uri';
 
   /**
-   * Returns lines.
-   * @return stdClass
+   * Returns offers.
+   * @return array
    * @throws NotExecutedException
    */
-  public function finalResult(): \stdClass
+  public function finalResult(): array
   {
     if(!$this->executed)
       throw new NotSentException('Please send request first');
@@ -24,6 +24,6 @@ class AccountLines extends AbstractMethod
     if(!$this->isSuccess())
       throw new NotSuccessException('Request did not return success result: '.\json_encode($this->result));
 
-    return (object)$this->result()->result->lines;
+    return $this->result()->result->offers;
   }
 }
