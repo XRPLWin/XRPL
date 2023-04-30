@@ -1,7 +1,7 @@
 /vendor
 /composer.lock
 /composer.phar
-/.phpunit.cache2
+/.phpunit.cache
 build
 coverage
 phpunit.xml
