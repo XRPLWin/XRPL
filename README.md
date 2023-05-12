@@ -9,8 +9,6 @@
 - [Composer](https://getcomposer.org/)
 
 ## Installation
-This Package is still in **beta**, to install run
-
 ```
 composer require xrplwin/xrpl
 ```
