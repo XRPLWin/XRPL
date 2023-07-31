@@ -234,7 +234,7 @@ abstract class AbstractMethod
 
   /**
    * If marker is present in current result, this will return new method with marker applied to params.
-   * If no marker is present thi will return null.
+   * If no marker is present this will return null.
    * @return ?AbstractMethod
    */
   public function next(): ?AbstractMethod
