@@ -13,4 +13,11 @@ class XRPLParserUtilFlagsTest extends TestCase
     $this->assertEquals(1,count($extracted));
     $this->assertEquals(['tfSell'],$extracted);
   }
+
+  public function testExtractCanonicalGlobalFlag()
+  {
+    $extracted = Flags::extract(2148007936,'OfferCreate');
+    $this->assertEquals(2,count($extracted));
+    $this->assertEquals(['tfFullyCanonicalSig','tfSell'],$extracted);
+  }
 }

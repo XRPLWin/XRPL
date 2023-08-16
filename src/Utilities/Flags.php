@@ -12,6 +12,9 @@ final class Flags
 {
 
   public const FLAGS = [
+    '_GLOBAL' => [
+      'tfFullyCanonicalSig'   => 0x80000000
+    ],
     'EnableAmendment' => [
       'tfGotMajority'         => 0x00010000,
       'tfLostMajority'        => 0x00020000
