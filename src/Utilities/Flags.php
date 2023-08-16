@@ -59,11 +59,21 @@ final class Flags
 
   //todo account set  asf flags... https://js.xrpl.org/enums/AccountSetAsfFlags.html
 
-  public static function extract(int $flags, $transactionType): array
+  /**
+   * Extract flag names from Flags for specific transaction type.
+   * @param int $flags
+   * @param string $transactionType
+   * @return array
+   */
+  public static function extract(int $flags, string $transactionType): array
   {
     $r = [];
 
-    $definedFlags = self::FLAGS[$transactionType];
+    $definedFlags = [];
+    if(isset(self::FLAGS[$transactionType]))
+      $definedFlags = self::FLAGS[$transactionType];
+    
+    $definedFlags = \array_merge(self::FLAGS['_GLOBAL'],$definedFlags);
     
     foreach($definedFlags as $name => $v) {
       if(self::hasFlag($flags,$v)) {
