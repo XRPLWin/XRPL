@@ -98,13 +98,16 @@ final class Flags
 
   public static function description(string $transactiontype, string $flagname, bool $htmlFormat = false): string
   {
+    if($flagname == 'tfFullyCanonicalSig')
+      $transactiontype = '';
+
     $path = $transactiontype.'_'.$flagname;
 
     $html = '';
 
     switch($path) {
       case '_GLOBAL_tfFullyCanonicalSig':
-      case 'tfFullyCanonicalSig':
+      case '_tfFullyCanonicalSig':
         $html = 'DEPRECATED No effect. (If the <a href="https://xrpl.org/known-amendments.html#requirefullycanonicalsig">RequireFullyCanonicalSig amendment</a> is not enabled, this flag enforces a <a href="https://xrpl.org/transaction-malleability.html#alternate-secp256k1-signatures">fully-canonical signature</a>.)';
         break;
       case 'EnableAmendment_tfGotMajority':
