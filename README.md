@@ -153,8 +153,40 @@ $account_tx = $client->api('tx')->params([
     'binary' => false
 ]);
 ```
-
 For other methods refer to https://xrpl.org/websocket-api-tool.html and [src/Api/Methods](src/Api/Methods)
+
+## Utilities
+
+There are few utilities available with this package:
+- Balance changes
+- Flags
+- UNLReport Flag Ledger
+
+### Flags
+
+```PHP
+use XRPLWin\XRPL\Utilities\Flags;
+
+//Methods:
+Flags::extract(int $flags, string $transactionType): array
+Flags::description(string $transactiontype, string $flagname, bool $htmlFormat = false): string
+Flags::hasFlag(int $flags, int $check): bool
+```
+
+### UNLReportFlagLedger
+
+Flag ledger is calculated using modulo formula LedgerIndex % 256.
+
+```PHP
+use XRPLWin\XRPL\Utilities\UNLReportFlagLedger;
+
+UNLReportFlagLedger::isFlag(256);   //for ledger sequence 256 - true
+UNLReportFlagLedger::isFlag(257);   //for ledger sequence 257 - false
+UNLReportFlagLedger::prev(6873600);          //6873344
+UNLReportFlagLedger::prevOrCurrent(6873600); //6873600
+UNLReportFlagLedger::next(6873600);          //6873856
+UNLReportFlagLedger::nextOrCurrent(6873600); //6873600
+```
 
 ## Running tests
 Run all tests in "tests" directory.
