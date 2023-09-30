@@ -106,7 +106,7 @@ $account_tx->fill($responses['rAcct1']);
 $transactions = $account_tx->finalResult();
 
 ```
-*Note*: You will need to handle rate limiting and exception handling yourself when using Promises.
+*Notes*: You will need to handle rate limiting and exception handling yourself when using Promises. Also each promise must be created from new instance of `\XRPLWin\XRPL\Client` this is to make sure each promise has its own seperated HttpClient instance.
 
 ### Paginating result
 ```PHP
