@@ -7,5 +7,5 @@ namespace XRPLWin\XRPL;
 
 class WSSClient
 {
-  //Todo
+  //Todo https://github.com/arthurkushman/php-wss
 }
