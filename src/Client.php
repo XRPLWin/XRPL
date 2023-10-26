@@ -20,7 +20,7 @@ class Client
   /**
   * XRPL Client constructor.
   * @param array $config
-  * @param 
+  * @param ?XRPLWinHttpClientInterface $httpClient
   */
   public function __construct(array $config, ?XRPLWinHttpClientInterface $httpClient = null)
   {
