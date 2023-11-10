@@ -13,10 +13,10 @@ class LedgerClosed extends AbstractMethod
 
   /**
    * Returns result.
-   * @return stdClass
+   * @return int
    * @throws NotExecutedException
    */
-  public function finalResult(): \stdClass
+  public function finalResult(): int
   {
     if(!$this->executed)
       throw new NotSentException('Please send request first');
@@ -24,6 +24,6 @@ class LedgerClosed extends AbstractMethod
     if(!$this->isSuccess())
       throw new NotSuccessException('Request did not return success result');
 
-    return $this->result()->result;
+    return $this->result()->result->ledger_index;
   }
 }
