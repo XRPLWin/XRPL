@@ -28,6 +28,7 @@ abstract class AbstractMethod
   protected ?Closure $cooldown_callback = null;
   protected int $tries = 3; //how much times request is retried if rate limiting is reached
   protected int $tries_tracker = 0; //how much tries are executed so far
+  protected int $timeout = 0; //http timeout, 0 is no timeout - see guzzle docs
 
   protected ?Throwable $lastException;
   
@@ -106,6 +107,7 @@ abstract class AbstractMethod
       ->requestAsync('POST', $this->endpoint, [
         'http_errors' => true,
         'connect_timeout' => 10,
+        'timeout' => $this->timeout,
         'body' => \json_encode($p),
         'headers' => $this->client->getHeaders()
       ]);
@@ -168,6 +170,7 @@ abstract class AbstractMethod
       ->request('POST', $this->endpoint, [
         'http_errors' => false,
         'connect_timeout' => 10,
+        'timeout' => $this->timeout,
         'body' => \json_encode($p),
         'headers' => $this->client->getHeaders()
       ]);
@@ -389,6 +392,7 @@ abstract class AbstractMethod
   /**
    * Sets how much times script will try to re-query Ledger in case of Rate limited response.
    * Default value is 5 seconds.
+   * @param int $tries
    * @return self
    */
   public function setTries(int $tries): self
@@ -397,6 +401,18 @@ abstract class AbstractMethod
       throw new \Exception('Tries can not be lower than 1');
 
     $this->tries = $tries;
+    return $this;
+  }
+
+  /**
+   * Set timeout value of http request, this value will be sent to guzzle http client.
+   * Default value is 0
+   * @param int $seconds
+   * @return self
+   */
+  public function setTimeout(int $seconds): self
+  {
+    $this->timeout = $seconds;
     return $this;
   }
 }

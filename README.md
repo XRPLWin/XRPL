@@ -43,6 +43,9 @@ If you wish to define custom behaviour when request is rate-limited you can via 
 $account_tx->setCooldownSeconds(10);
 //(optional) Override default number of tries when request is rate-limited (default is 3)
 $account_tx->setTries(5);
+//(optional) Set http timeout to 3 seconds (default is 0 - eg no timeout)
+//           After 3 seconds method will throw \XRPLWin\XRPL\Exceptions\BadRequestException on timeout
+$account_tx->setTimeout(3);
 
 //(optional) Define custom cooldown callback
 $account_tx->setCooldownHandler(
