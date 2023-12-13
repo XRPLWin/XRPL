@@ -58,6 +58,9 @@ final class Flags
       'tfDisallowXRP'         => 0x00100000,
       'tfAllowXRP'            => 0x00200000
     ],
+    'ClaimReward' => [
+      'tfOptOut'              => 0x00000001
+    ]
   ];
 
   //todo account set  asf flags... https://js.xrpl.org/enums/AccountSetAsfFlags.html
@@ -193,6 +196,9 @@ final class Flags
         break;
       case 'AccountSet_tfAllowXRP':
         $html = 'XRP is allowed to be sent to this account.';
+        break;
+      case 'ClaimReward_tfOptOut':
+        $html = 'The isOptOut flag in the ClaimReward is used to opt-out an account from rewards by removing reward-related fields from the account object in the ledger if the sfFlags field in the transaction is set to 1.';
         break;
     }
 
