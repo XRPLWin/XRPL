@@ -28,6 +28,9 @@ final class Flags
       'tfTrustLine'           => 0x00000004,
       'tfTransferable'        => 0x00000008
     ],
+    'URITokenMint' => [
+      'tfBurnable'            => 0x00000001,
+    ],
     'OfferCreate' => [
       'tfPassive'             => 0x00010000,
       'tfImmediateOrCancel'   => 0x00020000,
@@ -124,6 +127,9 @@ final class Flags
         break;
       case 'NFTokenMint_tfBurnable':
         $html = 'If set, indicates that the minted token may be burned by the issuer even if the issuer does not currently hold the token. The current holder of the token may always burn it.';
+        break;
+      case 'URITokenMint_tfBurnable':
+        $html = 'If set, indicates that the minted token may be burned by the issuer (or an entity authorized by the issuer) even if the issuer does not currently hold the token. The current holder of the token may always burn it.';
         break;
       case 'NFTokenMint_tfOnlyXRP':
         $html = 'If set, indicates that the token may only be offered or sold for XRP.';
