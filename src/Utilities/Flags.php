@@ -63,6 +63,26 @@ final class Flags
     ],
     'ClaimReward' => [
       'tfOptOut'              => 0x00000001
+    ],
+    'AMMDeposit' => [
+      'tfLPToken'             => 0x00010000,
+      'tfSingleAsset'         => 0x00080000,
+      'tfTwoAsset'            => 0x00100000,
+      'tfOneAssetLPToken'     => 0x00200000,
+      'tfLimitLPToken'        => 0x00400000,
+      'tfTwoAssetIfEmpty'     => 0x00800000
+    ],
+    'AMMWithdraw' => [
+      'tfLPToken'             => 0x00010000,
+      'tfWithdrawAll'         => 0x00020000,
+      'tfOneAssetWithdrawAll' => 0x00040000,
+      'tfSingleAsset'         => 0x00080000,
+      'tfTwoAsset'            => 0x00100000,
+      'tfOneAssetLPToken'     => 0x00200000,
+      'tfLimitLPToken'        => 0x00400000,
+    ],
+    'XChainModifyBridge' => [
+      'tfClearAccountCreateAmount' => 0x00010000,
     ]
   ];
 
@@ -205,6 +225,48 @@ final class Flags
         break;
       case 'ClaimReward_tfOptOut':
         $html = 'The isOptOut flag in the ClaimReward is used to opt-out an account from rewards by removing reward-related fields from the account object in the ledger if the sfFlags field in the transaction is set to 1.';
+        break;
+      case 'AMMDeposit_tfLPToken':
+        $html = 'Perform a double-asset deposit and receive the specified amount of LP Tokens.';
+        break;
+      case 'AMMDeposit_tfSingleAsset':
+        $html = 'Perform a single-asset deposit with a specified amount of the asset to deposit.';
+        break;
+      case 'AMMDeposit_tfTwoAsset':
+        $html = 'Perform a double-asset deposit with specified amounts of both assets.';
+        break;
+      case 'AMMDeposit_tfOneAssetLPToken':
+        $html = 'Perform a single-asset deposit and receive the specified amount of LP Tokens.';
+        break;
+      case 'AMMDeposit_tfLimitLPToken':
+        $html = 'Perform a single-asset deposit with a specified effective price.';
+        break;
+      case 'AMMDeposit_tfTwoAssetIfEmpty':
+        $html = 'Perform a special double-asset deposit to an AMM with an empty pool.';
+        break;
+      case 'AMMWithdraw_tfLPToken':
+        $html = 'Return the specified amount of LP Tokens and receive both assets from the AMM\'s pool in amounts based on the returned LP Token\'s share of the total LP Tokens issued.';
+        break;
+      case 'AMMWithdraw_tfWithdrawAll':
+        $html = 'Return <i>all</i> of your LP Tokens and receive as much as you can of both assets in the AMM\'s pool.';
+        break;
+      case 'AMMWithdraw_tfOneAssetWithdrawAll':
+        $html = 'Withdraw at least the specified amount of one asset, by returning all of your LP Tokens. Fails if you can\'t receive at least the specified amount. The specified amount can be 0, meaning the transaction succeeds if it withdraws any positive amount.';
+        break;
+      case 'AMMWithdraw_tfSingleAsset':
+        $html = 'Withdraw exactly the specified amount of one asset, by returning as many LP Tokens as necessary.';
+        break;
+      case 'AMMWithdraw_tfTwoAsset':
+        $html = 'Withdraw both of this AMM\'s assets, in up to the specified amounts. The actual amounts received maintains the balance of assets in the AMM\'s pool.';
+        break;
+      case 'AMMWithdraw_tfOneAssetLPToken':
+        $html = 'Withdraw up to the specified amount of one asset, by returning up to the specified amount of LP Tokens.';
+        break;
+      case 'AMMWithdraw_tfLimitLPToken':
+        $html = 'Withdraw up to the specified amount of one asset, but pay no more than the specified effective price in LP Tokens per unit of the asset received.';
+        break;
+      case 'XChainModifyBridge_tfClearAccountCreateAmount':
+        $html = 'Clears the MinAccountCreateAmount of the bridge.';
         break;
     }
 
