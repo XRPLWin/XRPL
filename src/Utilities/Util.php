@@ -95,7 +95,7 @@ final class Util
       }
     } else if (\preg_match('/^1+$/', $e)) { //regexp: allones
       // Infinity or NaN
-      if(\preg_match('/^0+$/', $m)) { //regexp: allones
+      if(\preg_match('/^0+$/', $m)) { //regexp: allzeros
         $value = true; //Infinity
       } else {
         $value = null; //NaN
