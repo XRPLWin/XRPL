@@ -10,6 +10,10 @@ class XRPLParserUtilUtilTest extends TestCase
   public function testConvertCurrencyToSymbolDemurrage()
   {
     $this->assertEquals('XAU (-0.5% pa)',Util::currencyToSymbol('0158415500000000C1F76FF6ECB0BAC600000000'));
+    $this->assertEquals('XAU (-0.5% pa)',Util::currencyToSymbol('015841551A748AD2C1F76FF6ECB0CCCD00000000'));
+    $this->assertEquals('LOT (-99% pa)',Util::currencyToSymbol('014C4F5400000000C15A1F74D9006ADA00000000'));
+    $this->assertEquals('CNY (-60% pa)',Util::currencyToSymbol('01434E5900000000C180694BFF0A625D00000000'));
+    
   }
 
   public function testConvertCurrencyToSymbolISO()

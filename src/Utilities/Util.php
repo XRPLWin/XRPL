@@ -41,7 +41,7 @@ final class Util
         //let interest_after_year = precision(Math.pow(Math.E, (interest_start+year_seconds - interest_start) / interest_period), 14);
         $interest_after_year = \pow(\exp(1), $year_seconds / $interest_period);
         $interest = ($interest_after_year*100) - 100;
-        return $code.' ('.$interest.'% pa)';
+        return $code.' ('.round($interest,1).'% pa)';
       }
 
       $r = \trim(\hex2bin($currencycode));
