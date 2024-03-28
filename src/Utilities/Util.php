@@ -14,7 +14,7 @@ final class Util
   * @see https://3v4l.org/Mp2Fu
   * @return string
   */
-  public static function currencyToSymbol($currencycode, $malformedUtf8ReturnString = '?') : string
+  public static function currencyToSymbol(string $currencycode, string $malformedUtf8ReturnString = '?') : string
   {
     if( \strlen($currencycode) == 40 )
     {

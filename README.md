@@ -164,6 +164,7 @@ There are few utilities available with this package:
 - Balance changes
 - Flags
 - UNLReport Flag Ledger
+- Currency dode to readable currency code
 
 ### Flags
 
@@ -190,6 +191,24 @@ UNLReportFlagLedger::prevOrCurrent(6873600); //6873600
 UNLReportFlagLedger::next(6873600);          //6873856
 UNLReportFlagLedger::nextOrCurrent(6873600); //6873600
 ```
+
+### Util class
+Converts Currency Code ISO or HEX to human readable representation.  
+
+```PHP
+use XRPLWin\XRPL\Utilities\Util;
+#Syntax: Util::currencyToSymbol(string $ISO_or_HEX, $malformedUtf8ReturnString = '?')
+
+//ISO Currency Code
+Util::currencyToSymbol('EUR') //EUR 
+//Deprecated Demurrage Currency Code
+Util::currencyToSymbol('0158415500000000C1F76FF6ECB0BAC600000000') //XAU (-0.5% pa)
+//Nonstandard Currency Code
+Util::currencyToSymbol('534F4C4F00000000000000000000000000000000') //SOLO
+```
+Read more:
+- https://xrpl.org/docs/references/protocol/data-types/currency-formats/#currency-formats
+- https://xrpl.org/docs/concepts/tokens/fungible-tokens/demurrage/
 
 ## Running tests
 Run all tests in "tests" directory.
