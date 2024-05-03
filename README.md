@@ -161,7 +161,7 @@ For other methods refer to https://xrpl.org/websocket-api-tool.html and [src/Api
 ## Utilities
 
 There are few utilities available with this package:
-- Balance changes
+- Balance changes (with tranding fees optional calculation)
 - Flags
 - UNLReport Flag Ledger
 - Currency dode to readable currency code

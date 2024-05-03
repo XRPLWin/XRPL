@@ -14,17 +14,19 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
     $tx = file_get_contents(__DIR__.'/../fixtures/utils/paymentXrpCreateAccount.json');
     $tx = \json_decode($tx);
 
-    $parser = new BalanceChanges($tx->metadata);
+    $parser = new BalanceChanges($tx->metadata,true);
     $result = $parser->result();
 
     $expected = [
       [
         'account' => 'rLDYrujdKUfVx28T9vRDAbyJ7G2WVXKo4K',
-        'balances' => [['value' => '100', 'currency' => 'XRP' ]]
+        'balances' => [['value' => '100', 'currency' => 'XRP' ]],
+        'tradingfees' => []
       ],
       [
         'account' => 'rKmBGxocj9Abgy25J51Mk1iqFzW9aVF9Tc',
-        'balances' => [['value' => '-100.012', 'currency' => 'XRP' ]]
+        'balances' => [['value' => '-100.012', 'currency' => 'XRP' ]],
+        'tradingfees' => []
       ]
     ];
     $this->assertEquals($expected,$result);
@@ -340,5 +342,19 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
     ];
 
     $this->assertEquals($expected,$result);
+  }
+
+  public function test_payment_issuer_tradingfee()
+  {
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/paymentTradingfee.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,true);
+    $result = $parser->result();
+
+    $this->assertEquals([
+      "EUR" => "0.0019960079849994",
+      "USD" => "0.000786512433092"
+    ],$result[2]['tradingfees']);
   }
 }

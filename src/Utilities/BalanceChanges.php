@@ -13,12 +13,13 @@ final class BalanceChanges
 {
   private readonly \stdClass $meta;
   private array $result = [];
+  private array $tradingfeeresult = [];
 
   /**
    * @param \stdClass $metadata - Transaction metadata
-   * @param \stdClass $tx - Transaction
+   * @param bool $calculateTradingFees - Enable to calculate IOU Trading Fees
    */
-  public function __construct(\stdClass $metadata)
+  public function __construct(\stdClass $metadata, bool $calculateTradingFees = false)
   {
     $this->meta = $metadata;
 
@@ -57,6 +58,36 @@ final class BalanceChanges
     }
     
     $this->result = $final;
+
+    if($calculateTradingFees) {
+      foreach($final as $k => $v) {
+        $this->result[$k]['tradingfees'] = $this->calcTradingFeesFromBalances($v['balances']);
+      }
+    }
+  }
+
+  private function calcTradingFeesFromBalances(array $balances): array
+  {
+    $tradingfees = [];
+    $map = [];
+    foreach($balances as $b) {
+      if(!isset($b['counterparty'])) continue;
+
+      $key = $b['currency'];
+      if(!isset($map[$key]))
+        $map[$key] = [];
+      $map[$key][] = $b['value'];
+    }
+
+    foreach($map as $key => $amounts) {
+      if(count($amounts) < 2) continue;
+      $BD = BigDecimal::of(0);
+      foreach($amounts as $amount) {
+        $BD = $BD->plus($amount);
+      }
+      $tradingfees[$key] = (string)$BD;
+    }
+    return $tradingfees;
   }
 
   /**
