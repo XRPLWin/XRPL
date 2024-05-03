@@ -13,7 +13,6 @@ final class BalanceChanges
 {
   private readonly \stdClass $meta;
   private array $result = [];
-  private array $tradingfeeresult = [];
 
   /**
    * @param \stdClass $metadata - Transaction metadata
