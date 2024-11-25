@@ -164,7 +164,7 @@ There are few utilities available with this package:
 - Balance changes (with tranding fees optional calculation)
 - Flags
 - UNLReport Flag Ledger
-- Currency dode to readable currency code
+- Currency code to readable currency code
 
 ### Flags
 
