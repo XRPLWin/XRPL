@@ -24,6 +24,6 @@ class ServerDefinitions extends AbstractMethod
     if(!$this->isSuccess())
       throw new NotSuccessException('Request did not return success result: '.\json_encode($this->result));
 
-    return $this->result();
+    return $this->result()->result;
   }
 }
