@@ -83,7 +83,14 @@ final class Flags
     ],
     'XChainModifyBridge' => [
       'tfClearAccountCreateAmount' => 0x00010000,
-    ]
+    ],
+    'Batch' => [
+      'tfAllOrNothing'        => 0x00010000,
+      'tfOnlyOne'             => 0x00020000,
+      'tfUntilFailure'        => 0x00040000,
+      'tfIndependent'         => 0x00080000,
+
+    ],
   ];
 
   //todo account set  asf flags... https://js.xrpl.org/enums/AccountSetAsfFlags.html
@@ -267,6 +274,18 @@ final class Flags
         break;
       case 'XChainModifyBridge_tfClearAccountCreateAmount':
         $html = 'Clears the MinAccountCreateAmount of the bridge.';
+        break;
+      case 'Batch_tfAllOrNothing':
+        $html = 'All transactions must succeed or else the whole batch fails.';
+        break;
+      case 'Batch_tfOnlyOne':
+        $html = 'Only the first successful transaction is applied. All transactions afterward fail or are skipped.';
+        break;
+      case 'Batch_tfUntilFailure':
+        $html = 'All transactions are applied until the first failure; subsequent transactions are skipped.';
+        break;
+      case 'Batch_tfIndependent':
+        $html = 'All transactions will be applied, regardless of failure.';
         break;
     }
 
