@@ -357,4 +357,15 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
       "USD" => "0.000786512433092"
     ],$result[2]['tradingfees']);
   }
+
+  /*public function test_mpt_payment1()
+  {
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptPayment1.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,true);
+    $result = $parser->result();
+
+    dd($result);
+  }*/
 }

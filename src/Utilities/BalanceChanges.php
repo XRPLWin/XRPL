@@ -40,6 +40,11 @@ final class BalanceChanges
           $quantities[$trustlineQuantity[1]['account']][] = $trustlineQuantity[1]; //flipped
         }
       }
+
+      //if($node->LedgerEntryType == 'MPToken') {
+      //  $mptQuantity = $this->getMPTQuantity($node);
+      //  dd($node);
+      //}
     }
     # Reorganize quantities array
     $final = [];
@@ -150,6 +155,12 @@ final class BalanceChanges
 
     return [$result,  $this->flipTrustlinePerspective($result)];
   }
+
+  //private function getMPTQuantity(\stdClass $node): ?array
+  //{
+  //  $value = $this->computeBalanceChange($node);
+  //  dd($value);
+  //}
 
   private function computeBalanceChange(\stdClass $node): ?BigDecimal
   {
