@@ -89,7 +89,18 @@ final class Flags
       'tfOnlyOne'             => 0x00020000,
       'tfUntilFailure'        => 0x00040000,
       'tfIndependent'         => 0x00080000,
-
+    ],
+    'MPTokenIssuanceCreate' => [
+      'tfMPTCanLock'          => 0x00000002,
+      'tfMPTRequireAuth'      => 0x00000004,
+      'tfMPTCanEscrow'        => 0x00000008,
+      'tfMPTCanTrade'         => 0x00000010,
+      'tfMPTCanTransfer'      => 0x00000020,
+      'tfMPTCanClawback'      => 0x00000040,
+    ],
+    'MPTokenIssuanceSet' => [
+      'tfMPTLock'             => 0x00000001,
+      'tfMPTUnlock'           => 0x00000002,
     ],
   ];
 
@@ -286,6 +297,32 @@ final class Flags
         break;
       case 'Batch_tfIndependent':
         $html = 'All transactions will be applied, regardless of failure.';
+        break;
+
+      case 'MPTokenIssuanceCreate_tfMPTCanLock':
+        $html = 'If set, indicates that the MPT can be locked both individually and globally. If not set, the MPT cannot be locked in any way.';
+        break;
+      case 'MPTokenIssuanceCreate_tfMPTRequireAuth':
+        $html = 'If set, indicates that individual holders must be authorized. This enables issuers to limit who can hold their assets.';
+        break;
+      case 'MPTokenIssuanceCreate_tfMPTCanEscrow':
+        $html = 'If set, indicates that individual holders can place their balances into an escrow.';
+        break;
+      case 'MPTokenIssuanceCreate_tfMPTCanTrade':
+        $html = 'If set, indicates that individual holders can trade their balances using the XRP Ledger DEX.';
+        break;
+      case 'MPTokenIssuanceCreate_tfMPTCanTransfer':
+        $html = 'If set, indicates that tokens can be transferred to other accounts that are not the issuer.';
+        break;
+      case 'MPTokenIssuanceCreate_tfMPTCanClawback':
+        $html = 'If set, indicates that the issuer can use the Clawback transaction to claw back value from individual holders.';
+        break;
+
+      case 'MPTokenIssuanceSet_tfMPTLock':
+        $html = 'If set, indicates that all MPT balances for this asset should be locked.';
+        break;
+      case 'MPTokenIssuanceSet_tfMPTUnlock':
+        $html = 'If set, indicates that all MPT balances for this asset should be unlocked.';
         break;
     }
 
