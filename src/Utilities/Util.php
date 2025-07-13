@@ -113,4 +113,15 @@ final class Util
 
   }
 
+  /**
+   * Test: makeMptID(4369311,'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E') should output: 0042AB9FAB8A5036CE4DB80D47016F557F9BFC9523985BF1
+   * @return string
+   */
+  public static function makeMptID(int $sequence, string $issuer): string {
+    $sequence = pack('N', $sequence); // 'N' = unsigned long (32-bit big endian)
+    $codec = new \Hardcastle\XRPL_PHP\Core\RippleAddressCodec\AddressCodec();
+    $accountID = $codec->decodeAccountId($issuer)->toUtf8();
+    return \strtoupper(\bin2hex($sequence . $accountID)); //Return as hex string
+  }
+
 }

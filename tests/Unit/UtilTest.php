@@ -37,4 +37,11 @@ class XRPLParserUtilUtilTest extends TestCase
   {
     $this->assertEquals('LP 03B20F3A7D26D33C6DA3503E5CCE3E67B102D4D2',Util::currencyToSymbol('03B20F3A7D26D33C6DA3503E5CCE3E67B102D4D2'));
   }
+
+  public function testMakeMptId() {
+    $sequence = 4369311;
+    $issuer = 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E';
+    $this->assertEquals('0042AB9FAB8A5036CE4DB80D47016F557F9BFC9523985BF1',Util::makeMptID($sequence,$issuer));
+
+  }
 }
