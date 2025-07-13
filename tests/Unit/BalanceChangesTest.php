@@ -365,6 +365,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
     $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
+    
     $expected = [
       [
         'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
@@ -372,6 +373,10 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'currency' => 'XRP',
             'value' => '-0.000001'
+          ],
+          [
+            'mpt_issuance_id' => '0042AB9FAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '-589589'
           ]
         ],
       ],
@@ -397,6 +402,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
     $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
+    
     $expected = [
       [
         'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
@@ -404,6 +410,10 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'currency' => 'XRP',
             'value' => '-0.000001'
+          ],
+          [
+            'mpt_issuance_id' => '0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '-58900'
           ]
         ],
       ],
@@ -431,7 +441,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
     $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
-    //dd($result);
+    
     $expected = [
       [
         'account' => 'rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc',
@@ -443,6 +453,15 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'currency' => 'XRP',
             'value' => '-0.000001'
+          ]
+        ],
+      ],
+      [
+        'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '100000',
           ]
         ],
       ],
@@ -460,7 +479,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
     $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
-    //dd($result);
+    
     $expected = [
       [
         'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
@@ -468,7 +487,11 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
           [
             'currency' => 'XRP',
             'value' => '-0.000001'
-          ]
+          ],
+          [
+            'mpt_issuance_id' => '0042AB9FAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '10000',
+          ],
         ],
       ],
       [

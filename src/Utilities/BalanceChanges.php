@@ -46,6 +46,12 @@ final class BalanceChanges
         if($mptQuantity !== null)
           $quantities[$mptQuantity['account']][] = $mptQuantity;
       }
+
+      if($node->LedgerEntryType == 'MPTokenIssuance') {
+        $mptOaQuantity = $this->getMPTOaQuantity($node);
+        if($mptOaQuantity !== null)
+          $quantities[$mptOaQuantity['account']][] = $mptOaQuantity;
+      }
     }
     # Reorganize quantities array
     $final = [];
@@ -182,6 +188,66 @@ final class BalanceChanges
       ]
     ];
     return $result;
+  }
+
+  /**
+   * Get OutstandingAmount balance change from MPTokenIssuance
+   */
+  private function getMPTOaQuantity(\stdClass $node): ?array
+  {
+    $value = $this->computeMPTOutstandingAmountChange($node);
+    
+    if($value === null)
+      return null;
+    $account = null;
+    if($node->FinalFields && $node->FinalFields->Issuer)
+      $account = $node->FinalFields->Issuer;
+    elseif($node->NewFields && $node->NewFields->Issuer)
+      $account = $node->NewFields->Issuer;
+    if($account === null)
+      return null;
+    $fields = ($node->NewFields === null) ? $node->FinalFields : $node->NewFields;
+    
+    $result =  [
+      'account' => (string)$account,
+      'balance' => [
+        'mpt_issuance_id' => Util::makeMptID($fields->Sequence,$fields->Issuer),
+        'value' => (string)BigDecimal::of($value->toInt())->stripTrailingZeros(), //unscaled
+      ]
+    ];
+
+    return $result;
+  }
+
+  private function computeMPTOutstandingAmountChange(\stdClass $node): ?BigDecimal
+  {
+    $value = null;
+    if($node->NewFields !== null && isset($node->NewFields->OutstandingAmount)) {
+      $value = $this->getValue($node->NewFields->OutstandingAmount);
+    } elseif($node->PreviousFields !== null && isset($node->PreviousFields->OutstandingAmount) && $node->FinalFields !== null && isset($node->FinalFields->OutstandingAmount)) {
+      $value = $this->getValue($node->FinalFields->OutstandingAmount)->minus($this->getValue($node->PreviousFields->OutstandingAmount));
+    } 
+    
+    /*elseif($node->PreviousFields !== null && !isset($node->PreviousFields->OutstandingAmount) && $node->FinalFields !== null && isset($node->FinalFields->OutstandingAmount)) {
+      $PreviousFieldsKeys = \array_keys((array)$node->PreviousFields);
+      if(count($PreviousFieldsKeys)) {
+        //there was some prev keys but MPTAmount was not set, something else than balance was changed
+        $value = $this->getValue('0');
+      } else {
+        //there was no prev keys set
+        //see 732EE5C1222385C34F965EF0FC7C2CD3E952AAA6A4CF2CA2F35D43C4CD40DCF6
+        $value = $this->getValue('0');
+      }
+    }*/
+
+    if($value === null)
+      return null;
+
+    if($value->isEqualTo(0))
+      return null;
+    return $value->negated();
+    //return $value;
+
   }
 
   private function computeMPTAmountChange(\stdClass $node): ?BigDecimal
