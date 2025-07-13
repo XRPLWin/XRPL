@@ -193,7 +193,14 @@ final class BalanceChanges
     } elseif($node->PreviousFields !== null && isset($node->PreviousFields->MPTAmount) && $node->FinalFields !== null && isset($node->FinalFields->MPTAmount)) {
       $value = $this->getValue($node->FinalFields->MPTAmount)->minus($this->getValue($node->PreviousFields->MPTAmount));
     } elseif($node->PreviousFields !== null && !isset($node->PreviousFields->MPTAmount) && $node->FinalFields !== null && isset($node->FinalFields->MPTAmount)) {
-      $value = $this->getValue($node->FinalFields->MPTAmount);
+      $PreviousFieldsKeys = \array_keys((array)$node->PreviousFields);
+      if(count($PreviousFieldsKeys)) {
+        //there was some prev keys but MPTAmount was not set, something else than balance was changed
+        $value = $this->getValue('0');
+      } else {
+        //there was no prev keys set, initial prev balance is 0, set final MPTAmount as change
+        $value = $this->getValue($node->FinalFields->MPTAmount);
+      }
     }
 
     if($value === null)

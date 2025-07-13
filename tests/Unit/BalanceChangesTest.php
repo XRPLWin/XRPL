@@ -484,4 +484,37 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
     $this->assertEquals($expected,$result);
   }
+
+  public function test_mpt_escrowfinish1()
+  {
+    //return mpt back to issuer
+
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptEscrowFinish1.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,false);
+    $result = $parser->result();
+    $expected = [
+      [
+        'account' => 'rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc',
+        'balances' => [
+          [
+            'currency' => 'XRP',
+            'value' => '-0.000001'
+          ]
+        ],
+      ],
+      [
+        'account' => 'ra4qNsNJqY92MjEmSPmydz3XqsxQUfNg9k',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '99415',
+          ],
+        ]
+      ]
+    ];
+
+    $this->assertEquals($expected,$result);
+  }
 }
