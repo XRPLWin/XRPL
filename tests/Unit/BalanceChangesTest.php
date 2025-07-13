@@ -358,14 +358,130 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
     ],$result[2]['tradingfees']);
   }
 
-  /*public function test_mpt_payment1()
+  public function test_mpt_payment1()
   {
     $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptPayment1.json');
     $tx = \json_decode($tx);
 
-    $parser = new BalanceChanges($tx->result->meta,true);
+    $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
+    $expected = [
+      [
+        'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
+        'balances' => [
+          [
+            'currency' => 'XRP',
+            'value' => '-0.000001'
+          ]
+        ],
+      ],
+      //MPT:
+      [
+        'account' => 'ra4qNsNJqY92MjEmSPmydz3XqsxQUfNg9k',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9FAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '589589',
+          ]
+        ]
+      ]
+    ];
 
-    dd($result);
-  }*/
+    $this->assertEquals($expected,$result);
+  }
+
+  public function test_mpt_payment2()
+  {
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptPayment2.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,false);
+    $result = $parser->result();
+    $expected = [
+      [
+        'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
+        'balances' => [
+          [
+            'currency' => 'XRP',
+            'value' => '-0.000001'
+          ]
+        ],
+      ],
+      //MPT:
+      [
+        'account' => 'ra4qNsNJqY92MjEmSPmydz3XqsxQUfNg9k',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '58900',
+          ]
+        ]
+      ]
+    ];
+
+    $this->assertEquals($expected,$result);
+  }
+
+  public function test_mpt_payment3()
+  {
+    //return mpt back to issuer
+
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptPayment3.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,false);
+    $result = $parser->result();
+    //dd($result);
+    $expected = [
+      [
+        'account' => 'rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '-100000',
+          ],
+          [
+            'currency' => 'XRP',
+            'value' => '-0.000001'
+          ]
+        ],
+      ],
+    ];
+
+    $this->assertEquals($expected,$result);
+  }
+
+  public function test_mpt_clawback1()
+  {
+    //return mpt back to issuer
+
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptClawback1.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,false);
+    $result = $parser->result();
+    //dd($result);
+    $expected = [
+      [
+        'account' => 'rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E',
+        'balances' => [
+          [
+            'currency' => 'XRP',
+            'value' => '-0.000001'
+          ]
+        ],
+      ],
+      [
+        'account' => 'ra4qNsNJqY92MjEmSPmydz3XqsxQUfNg9k',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9FAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '-10000',
+          ],
+        ]
+      ]
+    ];
+
+    $this->assertEquals($expected,$result);
+  }
 }

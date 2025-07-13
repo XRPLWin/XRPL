@@ -1,0 +1,99 @@
+{
+  "result": {
+    "Account": "rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc",
+    "Amount": {
+      "mpt_issuance_id": "0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1",
+      "value": "100000"
+    },
+    "DeliverMax": {
+      "mpt_issuance_id": "0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1",
+      "value": "100000"
+    },
+    "Destination": "rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E",
+    "Fee": "1",
+    "Flags": 131072,
+    "LastLedgerSequence": 4396488,
+    "Sequence": 4369345,
+    "SigningPubKey": "EDD4DEC0DC4B79B3431AC6464DCE7CAE7794E8A48B54526ECA26AC89227410C1E7",
+    "TransactionType": "Payment",
+    "TxnSignature": "96CDFE0438B3B1AAE5557DF2EA854C699876364E28B46AD9562F49F19ADDCCEAB5706BAA2C00D2FF9C42A2E1C44541F85441231948A1298969DA23FFC78DD705",
+    "ctid": "C04315B600000002",
+    "date": 805614700,
+    "hash": "5E9FADB2FD6E4C73B74CC9F8A0AF520726E67FE9F019AA186CE5D44B82F5FE41",
+    "inLedger": 4396470,
+    "ledger_index": 4396470,
+    "meta": {
+      "AffectedNodes": [
+        {
+          "ModifiedNode": {
+            "FinalFields": {
+              "Account": "rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc",
+              "Flags": 0,
+              "LockedAmount": "589",
+              "MPTAmount": "58560315",
+              "MPTokenIssuanceID": "0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1",
+              "OwnerNode": "0"
+            },
+            "LedgerEntryType": "MPToken",
+            "LedgerIndex": "159D1E376B7AD4E05A4ECB2DDCC871992F8BF6C33E460A001A413030D0017654",
+            "PreviousFields": {
+              "MPTAmount": "58660315"
+            },
+            "PreviousTxnID": "DC64686819CFD259106AB179E882E5200DB70260CD93B00CC8B92A125CFE5E79",
+            "PreviousTxnLgrSeq": 4396456
+          }
+        },
+        {
+          "ModifiedNode": {
+            "FinalFields": {
+              "Account": "rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc",
+              "Balance": "99999968",
+              "Flags": 0,
+              "OwnerCount": 4,
+              "Sequence": 4369346
+            },
+            "LedgerEntryType": "AccountRoot",
+            "LedgerIndex": "414C65D57D6419D3867A186505ACD82D62C51F16D1ED21735EFA798970D577B4",
+            "PreviousFields": {
+              "Balance": "99999969",
+              "Sequence": 4369345
+            },
+            "PreviousTxnID": "DC64686819CFD259106AB179E882E5200DB70260CD93B00CC8B92A125CFE5E79",
+            "PreviousTxnLgrSeq": 4396456
+          }
+        },
+        {
+          "ModifiedNode": {
+            "FinalFields": {
+              "AssetScale": 2,
+              "Flags": 122,
+              "Issuer": "rGepNyxjJbtN75Zb4fgkjQsnv3UUcbp45E",
+              "LockedAmount": "1178",
+              "MPTokenMetadata": "7B0A20202263757272656E6379223A2022524C555344222C0A2020226E616D65223A2022526970706C6520555344222C0A20202264657363223A20224120726567756C6174656420737461626C65636F696E2069737375656420627920526970706C652E222C0A20202269636F6E223A202268747470733A2F2F726970706C652E636F6D2F6173736574732F726C7573642D6C6F676F2E706E67222C0A20202261737365745F636C617373223A2022727761222C0A20202261737365745F737562636C617373223A2022737461626C65636F696E222C0A202022616363745F6E616D65223A2022526970706C65222C0A2020227765626C696E6B73223A205B0A202020207B0A2020202020202275726C223A202268747470733A2F2F726970706C652E636F6D2F222C0A2020202020202274797065223A202277656273697465222C0A202020202020227469746C65223A20224F6666696369616C2057656273697465220A202020207D2C0A202020207B0A2020202020202275726C223A202268747470733A2F2F7872706C2E6F72672F222C0A2020202020202274797065223A2022646F6373222C0A202020202020227469746C65223A20225852504C20446F63756D656E746174696F6E220A202020207D0A20205D0A7D",
+              "MaximumAmount": "58900000000",
+              "OutstandingAmount": "61140099",
+              "OwnerNode": "0",
+              "Sequence": 4369310,
+              "TransferFee": 589
+            },
+            "LedgerEntryType": "MPTokenIssuance",
+            "LedgerIndex": "F817E1402260C0071CB61DEC67CE55928AD0B76841C882294A7A7FE5F0B18820",
+            "PreviousFields": {
+              "OutstandingAmount": "61240099"
+            },
+            "PreviousTxnID": "DC64686819CFD259106AB179E882E5200DB70260CD93B00CC8B92A125CFE5E79",
+            "PreviousTxnLgrSeq": 4396456
+          }
+        }
+      ],
+      "TransactionIndex": 0,
+      "TransactionResult": "tesSUCCESS",
+      "delivered_amount": {
+        "mpt_issuance_id": "0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1",
+        "value": "100000"
+      }
+    },
+    "status": "success",
+    "validated": true
+  }
+}

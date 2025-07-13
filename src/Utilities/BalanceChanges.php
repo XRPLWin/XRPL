@@ -41,10 +41,11 @@ final class BalanceChanges
         }
       }
 
-      //if($node->LedgerEntryType == 'MPToken') {
-      //  $mptQuantity = $this->getMPTQuantity($node);
-      //  dd($node);
-      //}
+      if($node->LedgerEntryType == 'MPToken') {
+        $mptQuantity = $this->getMPTQuantity($node);
+        if($mptQuantity !== null)
+          $quantities[$mptQuantity['account']][] = $mptQuantity;
+      }
     }
     # Reorganize quantities array
     $final = [];
@@ -156,11 +157,53 @@ final class BalanceChanges
     return [$result,  $this->flipTrustlinePerspective($result)];
   }
 
-  //private function getMPTQuantity(\stdClass $node): ?array
-  //{
-  //  $value = $this->computeBalanceChange($node);
-  //  dd($value);
-  //}
+  private function getMPTQuantity(\stdClass $node): ?array
+  {
+    $value = $this->computeMPTAmountChange($node);
+    if($value === null)
+      return null;
+
+    $account = null;
+    if($node->FinalFields && $node->FinalFields->Account)
+      $account = $node->FinalFields->Account;
+    elseif($node->NewFields && $node->NewFields->Account)
+      $account = $node->NewFields->Account;
+
+    if($account === null)
+      return null;
+
+    $fields = ($node->NewFields === null) ? $node->FinalFields : $node->NewFields;
+
+    $result =  [
+      'account' => (string)$account,
+      'balance' => [
+        'mpt_issuance_id' => $fields->MPTokenIssuanceID,
+        'value' => (string)BigDecimal::of($value->toInt())->stripTrailingZeros(), //unscaled
+      ]
+    ];
+    return $result;
+  }
+
+  private function computeMPTAmountChange(\stdClass $node): ?BigDecimal
+  {
+    $value = null;
+
+    if($node->NewFields !== null && isset($node->NewFields->MPTAmount)) {
+      $value = $this->getValue($node->NewFields->MPTAmount);
+    } elseif($node->PreviousFields !== null && isset($node->PreviousFields->MPTAmount) && $node->FinalFields !== null && isset($node->FinalFields->MPTAmount)) {
+      $value = $this->getValue($node->FinalFields->MPTAmount)->minus($this->getValue($node->PreviousFields->MPTAmount));
+    } elseif($node->PreviousFields !== null && !isset($node->PreviousFields->MPTAmount) && $node->FinalFields !== null && isset($node->FinalFields->MPTAmount)) {
+      $value = $this->getValue($node->FinalFields->MPTAmount);
+    }
+
+    if($value === null)
+      return null;
+
+    if($value->isEqualTo(0))
+      return null;
+
+    return $value;
+  }
 
   private function computeBalanceChange(\stdClass $node): ?BigDecimal
   {
@@ -177,10 +220,6 @@ final class BalanceChanges
 
     if($value->isEqualTo(0))
       return null;
-
-      /*if((string)$value == 184) {
-        dd($node);
-      }*/
 
     return $value;
   }
