@@ -26,7 +26,8 @@ final class Flags
       'tfBurnable'            => 0x00000001,
       'tfOnlyXRP'             => 0x00000002,
       'tfTrustLine'           => 0x00000004,
-      'tfTransferable'        => 0x00000008
+      'tfTransferable'        => 0x00000008,
+      'tfMutable'             => 0x00000010
     ],
     'URITokenMint' => [
       'tfBurnable'            => 0x00000001,
@@ -177,6 +178,9 @@ final class Flags
         break;
       case 'NFTokenMint_tfTransferable':
         $html = 'If set, indicates that this NFT can be transferred. This flag has no effect if the token is being transferred from the issuer or to the issuer.';
+        break;
+      case 'NFTokenMint_tfMutable':
+        $html = 'The URI field of the minted NFToken can be updated using the NFTokenModify transaction.';
         break;
       case 'OfferCreate_tfPassive':
         $html = 'If enabled, the offer does not consume offers that exactly match it, and instead becomes an Offer object in the ledger. It still consumes offers that cross it.';
