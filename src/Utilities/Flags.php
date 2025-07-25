@@ -52,7 +52,9 @@ final class Flags
       'tfSetNoRipple'         => 0x00020000,
       'tfClearNoRipple'       => 0x00040000,
       'tfSetFreeze'           => 0x00100000,
-      'tfClearFreeze'         => 0x00200000
+      'tfClearFreeze'         => 0x00200000,
+      'tfSetDeepFreeze'       => 0x00400000,
+      'tfClearDeepFreeze'     => 0x00800000
     ],
     'AccountSet' => [
       'tfRequireDestTag'      => 0x00010000,
@@ -223,6 +225,12 @@ final class Flags
         break;
       case 'TrustSet_tfClearFreeze':
         $html = 'Disable individual <a href="https://xrpl.org/freezes.html">Freeze</a> on the specific trust line.';
+        break;
+      case 'TrustSet_tfSetDeepFreeze':
+        $html = 'Deep freeze the trust line.';
+        break;
+      case 'TrustSet_tfClearDeepFreeze':
+        $html = 'Clear a deep-freeze on the trust line.';
         break;
       case 'AccountSet_tfRequireDestTag':
       case 'AccountSet_asfRequireDest':
