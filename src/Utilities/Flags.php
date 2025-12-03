@@ -62,7 +62,8 @@ final class Flags
       'tfRequireAuth'         => 0x00040000,
       'tfOptionalAuth'        => 0x00080000,
       'tfDisallowXRP'         => 0x00100000,
-      'tfAllowXRP'            => 0x00200000
+      'tfAllowXRP'            => 0x00200000,
+
     ],
     'ClaimReward' => [
       'tfOptOut'              => 0x00000001
@@ -105,6 +106,35 @@ final class Flags
       'tfMPTLock'             => 0x00000001,
       'tfMPTUnlock'           => 0x00000002,
     ],
+
+    //Objects:
+    'Object_AccountRoot' => [
+      //AccountRoot flags:
+      'lsfAllowTrustLineClawback(XAHAU)'=> 0x00001000, //xahau only
+      '0x00002000'                      => 0x00002000,
+      '0x00004000'                      => 0x00004000,
+      '0x00008000'                      => 0x00008000,
+      //
+      'lsfPasswordSpent'                => 0x00010000,
+      'lsfRequireDestTag'               => 0x00020000,
+      'lsfRequireAuth'                  => 0x00040000,
+      'lsfDisallowXRP'                  => 0x00080000,
+      //
+      'lsfDisableMaster'                => 0x00100000,
+      'lsfNoFreeze'                     => 0x00200000,
+      'lsfGlobalFreeze'                 => 0x00400000,
+      'lsfDefaultRipple'                => 0x00800000,
+      //
+      'lsfDepositAuth'                  => 0x01000000,
+      'lsfTshCollect'                   => 0x02000000,
+      'lsfDisallowIncomingNFTokenOffer(XRPL)/lsfURITokenIssuer(XAHAU)'  => 0x04000000, //xrpl/xahau
+      'lsfDisallowIncomingCheck'        => 0x08000000,
+      //
+      'lsfDisallowIncomingPayChan'      => 0x10000000,
+      'lsfDisallowIncomingTrustline'    => 0x20000000,
+      'lsfAllowTrustLineLocking(XRPL)/lsfURITokenIssuer(XAHAU)'         => 0x40000000,
+      'lsfAllowTrustLineClawback(XRPL)/lsfDisallowIncomingRemit(XAHAU)' => 0x80000000, //xrpl/xahau
+    ]
   ];
 
   //todo account set  asf flags... https://js.xrpl.org/enums/AccountSetAsfFlags.html
@@ -112,10 +142,10 @@ final class Flags
   /**
    * Extract flag names from Flags for specific transaction type.
    * @param int $flags
-   * @param string $transactionType
+   * @param string $transactionType or object
    * @return array
    */
-  public static function extract(int $flags, string $transactionType): array
+  public static function extract(int $flags, string $transactionType, bool $skipGlobal = false): array
   {
     $r = [];
 
@@ -123,7 +153,8 @@ final class Flags
     if(isset(self::FLAGS[$transactionType]))
       $definedFlags = self::FLAGS[$transactionType];
     
-    $definedFlags = \array_merge(self::FLAGS['_GLOBAL'],$definedFlags);
+    if(!$skipGlobal)
+      $definedFlags = \array_merge(self::FLAGS['_GLOBAL'],$definedFlags);
     
     foreach($definedFlags as $name => $v) {
       if(self::hasFlag($flags,$v)) {
