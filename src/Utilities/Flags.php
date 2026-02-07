@@ -107,6 +107,11 @@ final class Flags
       'tfMPTUnlock'           => 0x00000002,
     ],
 
+    'VaultCreate' => [
+      'tfVaultPrivate'              => 0x00010000,
+      'tfVaultShareNonTransferable' => 0x00020000,
+    ],
+
     //Objects:
     'Object_AccountRoot' => [
       //AccountRoot flags:
