@@ -372,6 +372,13 @@ final class Flags
       case 'MPTokenIssuanceSet_tfMPTUnlock':
         $html = 'If set, indicates that all MPT balances for this asset should be unlocked.';
         break;
+
+      case 'VaultCreate_tfVaultPrivate':
+        $html = 'If set, indicates that the vault is private. This flag can only be set when creating the vault.';
+        break;
+      case 'VaultCreate_tfVaultShareNonTransferable':
+        $html = 'If set, indicates the vault share is non-transferable. This flag can only be set when creating the vault.';
+        break;
     }
 
     if(!$htmlFormat)
