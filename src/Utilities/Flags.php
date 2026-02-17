@@ -379,6 +379,10 @@ final class Flags
       case 'VaultCreate_tfVaultShareNonTransferable':
         $html = 'If set, indicates the vault share is non-transferable. This flag can only be set when creating the vault.';
         break;
+
+      case 'LoanSet_tfLoanOverpayment':
+        $html = 'If set, indicates that the loan supports overpayments.';
+        break;
     }
 
     if(!$htmlFormat)
