@@ -387,6 +387,10 @@ final class Flags
       case 'LoanSet_tfLoanOverpayment':
         $html = 'If set, indicates that the loan supports overpayments.';
         break;
+
+      case 'CronSet_tfCronUnset':
+        $html = 'If set, indicates that the cron job should be removed from the scheduler.';
+        break;
     }
 
     if(!$htmlFormat)
