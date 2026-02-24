@@ -112,6 +112,10 @@ final class Flags
       'tfVaultShareNonTransferable' => 0x00020000,
     ],
 
+    'CronSet' => [
+      'tfCronUnset'           => 0x00000001,
+    ],
+
     //Objects:
     'Object_AccountRoot' => [
       //AccountRoot flags:
