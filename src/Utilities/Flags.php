@@ -112,6 +112,20 @@ final class Flags
       'tfVaultShareNonTransferable' => 0x00020000,
     ],
 
+    'LoanSet' => [
+      'tfLoanOverpayment'     => 0x00010000,
+    ],
+    'LoanManage' => [
+      'tfLoanDefault'         => 0x00010000,
+      'tfLoanImpair'          => 0x00020000,
+      'tfLoanUnimpair'        => 0x00040000,
+    ],
+    'LoanPay' => [
+      'tfLoanOverpayment'     => 0x00010000,
+      'tfLoanFullPayment'     => 0x00020000,
+      'tfLoanLatePayment'     => 0x00040000,
+    ],
+
     'CronSet' => [
       'tfCronUnset'           => 0x00000001,
     ],
@@ -386,6 +400,24 @@ final class Flags
 
       case 'LoanSet_tfLoanOverpayment':
         $html = 'If set, indicates that the loan supports overpayments.';
+        break;
+      case 'LoanManage_tfLoanDefault':
+        $html = 'If set, indicates that the loan is in default. This flag can only be set when managing the loan, and not when creating it.';
+        break;
+      case 'LoanManage_tfLoanImpair':
+        $html = 'If set, indicates that the loan is impaired. This flag can only be set when managing the loan, and not when creating it.';
+        break;
+      case 'LoanManage_tfLoanUnimpair':
+        $html = 'If set, indicates that the loan is unimpaired. This flag can only be set when managing the loan, and not when creating it.';
+        break;
+      case 'LoanPay_tfLoanOverpayment':
+        $html = 'If set, indicates that the remaining payment amount should be treated as an overpayment. This flag can only be set when making a payment on a loan.';
+        break;
+      case 'LoanPay_tfLoanFullPayment':
+        $html = 'If set, indicates that the borrower is making a full early repayment. This flag can only be set when making a payment on a loan.';
+        break;
+      case 'LoanPay_tfLoanLatePayment':
+        $html = 'If set, indicates that the borrower is making a late loan payment. This flag can only be set when making a payment on a loan.';
         break;
 
       case 'CronSet_tfCronUnset':
