@@ -511,7 +511,7 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
   public function test_loan_broker_cover_clawback1()
   {
-    $tx = file_get_contents(__DIR__.'/../fixtures/utils/loanBrokerCoverClawback1.json');
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/LoanBrokerCoverClawback1.json');
     $tx = \json_decode($tx);
 
     $parser = new BalanceChanges($tx->result->meta,false);
