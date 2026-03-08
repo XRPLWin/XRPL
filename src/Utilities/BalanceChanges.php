@@ -166,6 +166,7 @@ final class BalanceChanges
   private function getMPTQuantity(\stdClass $node): ?array
   {
     $value = $this->computeMPTAmountChange($node);
+    
     if($value === null)
       return null;
 
@@ -254,6 +255,35 @@ final class BalanceChanges
   {
     $value = null;
 
+    $finalFieldType = 'FinalFields';
+    if($node->NewFields !== null) {
+      $finalFieldType = 'NewFields';
+    }
+
+    $oldMPTAmount = $this->getValue('0');
+    if($node->PreviousFields !== null && isset($node->PreviousFields->MPTAmount)) {
+      $oldMPTAmount = $this->getValue($node->PreviousFields->MPTAmount);
+    }
+
+    $newMPTAmount = $this->getValue('0');
+    if($node->{$finalFieldType} !== null && isset($node->{$finalFieldType}->MPTAmount)) {
+      $newMPTAmount = $this->getValue($node->{$finalFieldType}->MPTAmount);
+    }
+
+    $value = $newMPTAmount->minus($oldMPTAmount);
+    
+    if($value === null)
+      return null;
+
+    if($value->isEqualTo(0))
+      return null;
+
+    return $value;
+
+    //OLD BELOW
+
+    /*dd($node,$value,$finalFieldType);
+
     if($node->NewFields !== null && isset($node->NewFields->MPTAmount)) {
       $value = $this->getValue($node->NewFields->MPTAmount);
     } elseif($node->PreviousFields !== null && isset($node->PreviousFields->MPTAmount) && $node->FinalFields !== null && isset($node->FinalFields->MPTAmount)) {
@@ -275,7 +305,7 @@ final class BalanceChanges
     if($value->isEqualTo(0))
       return null;
 
-    return $value;
+    return $value;*/
   }
 
   private function computeBalanceChange(\stdClass $node): ?BigDecimal

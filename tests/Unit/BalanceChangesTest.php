@@ -362,9 +362,10 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
   {
     $tx = file_get_contents(__DIR__.'/../fixtures/utils/mptPayment1.json');
     $tx = \json_decode($tx);
-
+    //echo 'AAAAAAAAAAAAAAAAAA';
     $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
+    //dd($result);
     
     $expected = [
       [
@@ -508,6 +509,43 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
     $this->assertEquals($expected,$result);
   }
 
+  public function test_loan_broker_cover_clawback1()
+  {
+    $tx = file_get_contents(__DIR__.'/../fixtures/utils/loanBrokerCoverClawback1.json');
+    $tx = \json_decode($tx);
+
+    $parser = new BalanceChanges($tx->result->meta,false);
+    $result = $parser->result();
+    //
+    $expected = [
+      [
+        'account' => 'rPmootBD4pqewsovD7xNwiUBEEMGCygAJk',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '00020819F9CC24A7381FE776A547005EC32B89AEA64C4C37',
+            'value' => '10000',
+          ],
+          [
+            'currency' => 'XRP',
+            'value' => '-0.000001'
+          ]
+        ],
+      ],
+      [
+        'account' => 'rfyoYKwFpnGZ9zbuVKoaDTBZ5ADK3c2Ti2',
+        'balances' => [
+          [
+            'mpt_issuance_id' => '00020819F9CC24A7381FE776A547005EC32B89AEA64C4C37',
+            'value' => '-10000',
+          ],
+        ]
+      ]
+    ];
+
+    $this->assertEquals($expected,$result);
+
+  }
+
   public function test_mpt_escrowfinish1()
   {
     //return mpt back to issuer
@@ -517,10 +555,15 @@ class XRPLParserUtilBalanceChangesTest extends TestCase
 
     $parser = new BalanceChanges($tx->result->meta,false);
     $result = $parser->result();
+    //dd($result);
     $expected = [
       [
         'account' => 'rMdLLyrrh1UC7M5rA4UVvBDjsbzi4Go1yc',
         'balances' => [
+          [
+            'mpt_issuance_id' => '0042AB9EAB8A5036CE4DB80D47016F557F9BFC9523985BF1',
+            'value' => '57858464',
+          ],
           [
             'currency' => 'XRP',
             'value' => '-0.000001'
