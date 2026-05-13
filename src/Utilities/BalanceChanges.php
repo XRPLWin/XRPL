@@ -131,7 +131,7 @@ final class BalanceChanges
       'account' => (string)$account,
       'balance' => [
         'currency' => 'XRP',
-        'value' => (string)BigDecimal::of($this->drops_to_xrp($value->toInt()))->stripTrailingZeros(),
+        'value' => (string)BigDecimal::of((string)$this->drops_to_xrp($value->toInt()))->strippedOfTrailingZeros(),
       ]
     ];
     return $result;
@@ -156,7 +156,7 @@ final class BalanceChanges
       'balance' => [
         'counterparty' => (isset($fields->HighLimit->issuer)) ? $fields->HighLimit->issuer : '',
         'currency' => (isset($fields->Balance->currency)) ? $fields->Balance->currency : '',
-        'value' => (string)$value->stripTrailingZeros(),
+        'value' => (string)$value->strippedOfTrailingZeros(),
       ]
     ];
 
@@ -185,7 +185,7 @@ final class BalanceChanges
       'account' => (string)$account,
       'balance' => [
         'mpt_issuance_id' => $fields->MPTokenIssuanceID,
-        'value' => (string)BigDecimal::of($value->toInt())->stripTrailingZeros(), //unscaled
+        'value' => (string)BigDecimal::of($value->toInt())->strippedOfTrailingZeros(), //unscaled
       ]
     ];
     return $result;
@@ -213,7 +213,7 @@ final class BalanceChanges
       'account' => (string)$account,
       'balance' => [
         'mpt_issuance_id' => Util::makeMptID($fields->Sequence,$fields->Issuer),
-        'value' => (string)BigDecimal::of($value->toInt())->stripTrailingZeros(), //unscaled
+        'value' => (string)BigDecimal::of($value->toInt())->strippedOfTrailingZeros(), //unscaled
       ]
     ];
 
@@ -327,11 +327,11 @@ final class BalanceChanges
     return $value;
   }
 
-  private function getValue($amount): BigDecimal
+  private function getValue(string|\stdClass $amount): BigDecimal
   {
     if(\is_string($amount))
       return BigDecimal::of($amount);
-    return BigDecimal::of($amount->value);
+    return BigDecimal::of((string)$amount->value);
   }
 
   private function flipTrustlinePerspective(array $balanceChange): array
@@ -342,7 +342,7 @@ final class BalanceChanges
       'balance' => [
         'counterparty' => $balanceChange['account'],
         'currency' => $balanceChange['balance']['currency'],
-        'value' => (string)$negatedBalance->stripTrailingZeros(),
+        'value' => (string)$negatedBalance->strippedOfTrailingZeros(),
       ]
     ];
 
