@@ -150,7 +150,7 @@ final class Flags
       //
       'lsfDepositAuth'                  => 0x01000000,
       'lsfTshCollect'                   => 0x02000000,
-      'lsfDisallowIncomingNFTokenOffer(XRPL)/lsfURITokenIssuer(XAHAU)'  => 0x04000000, //xrpl/xahau
+      'lsfDisallowIncomingNFTokenOffer' => 0x04000000,
       'lsfDisallowIncomingCheck'        => 0x08000000,
       //
       'lsfDisallowIncomingPayChan'      => 0x10000000,
